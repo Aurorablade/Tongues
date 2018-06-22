@@ -1754,7 +1754,27 @@ cID = self:GetID()
 	end;
 end;
 
+-- ElvUI Support for Tongues by Simpy from Tukui.org (June 21 2018)
+local ElvUIChat = IsAddOnLoaded('ElvUI') and ElvUI and ElvUI[1] and (ElvUI[1].private and ElvUI[1].private.chat.enable and ElvUI[1]:GetModule('Chat'))
+if ElvUIChat then
+	-- use ElvUI's Chat MessageEventHandler as the original function.
+	local oldHandler = ElvUIChat.ChatFrame_MessageEventHandler
+	Tongues.Hooks.Receive = function(...) oldHandler(ElvUIChat, ...); end
 
+	-- pass messages through Tongues function, when it's not an ElvUI chat history message.
+	function ElvUIChat:ChatFrame_MessageEventHandler(...)
+		-- ignore ElvUI Chat History messages because Tongues can't phrase old messages.
+		local arg18 = select(20, ...); -- 20: [2+18](self, event, ...)
+		if arg18 and arg18 == "ElvUI_ChatHistory" then
+			Tongues.Hooks.Receive(...);
+			return;
+		end
+
+		-- this call is to the modified function by Tongues addon.
+		-- it trys to phrase messages otherwise it passes back into the original function.
+		ChatFrame_MessageEventHandler(...);
+	end
+end
 
 --================================================================================================================
 
