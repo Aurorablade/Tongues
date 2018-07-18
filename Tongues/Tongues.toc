@@ -1,6 +1,6 @@
-## Interface: 70300
+## Interface: 80000
 ## Title: Tongues
-## Version:1.7.1
+## Version:1.8.0
 ## Notes: Create and use custom-defined languages, dialects, effects, and filters.
 ## DefaultState: Enabled
 ## Author: (Original)Skrull Adams (maintainer)Aurorablade/Fethas
