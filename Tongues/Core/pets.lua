@@ -1,6 +1,10 @@
 local BCT = LibStub("LibBabble-CreatureType-3.0"):GetLookupTable()
 
 Tongues.PetTable = {
+
+	["Basilisk"] = {
+		["Language"] = BCT["Serpent"]
+	};
 	[BCT["Bat"]] = {
 		["Language"] = BCT["Bat"],
 		["Speaktype"] = "squeeks",
@@ -16,6 +20,9 @@ Tongues.PetTable = {
 	[BCT["Bird of Prey"]] = {
 		["Language"] = "Bird",
 		["Speaktype"] = "cries",
+	};
+	["Blood Beast"] = {
+		["Language"] = "Nether"
 	};
 	[BCT["Boar"]] = {
 		["Language"] = BCT["Boar"],
@@ -46,6 +53,10 @@ Tongues.PetTable = {
 		["Speaktype"] = "snaps",
 	};	
 	[BCT["Devilsaur"]] = {
+		["Language"] = BCT["Devilsaur"],
+		["Speaktype"] = "roars",
+	};
+	["Direhorn"] = {
 		["Language"] = BCT["Devilsaur"],
 		["Speaktype"] = "roars",
 	};
@@ -106,7 +117,7 @@ Tongues.PetTable = {
 		["Language"] = BCT["Ravager"],
 		["Speaktype"] = "clacks",
 	};
-		[BCT["Raptor"]] = {
+	[BCT["Raptor"]] = {
 		["Language"] = BCT["Raptor"],
 		["Speaktype"] = "screeches",
 	};
@@ -224,5 +235,32 @@ Tongues.PetTable = {
 	["Riverbeast"] = {
 		["Language"] = "Riverbeast",
 		["Speaktype"] = "gurgles",
+	};
+	["Oxen"] = {
+		["Language"] = "Clefthoof",
+		["Speaktype"] = "roars",
+	};
+	["Scalehide"] = {
+		["Language"] = "Clefthoof",
+		["Speaktype"] = "roars",
+	};
+	["Feathermane"] = {
+		["Language"] = "Bird",
+	};
+	["Mechanical"] = {
+		["Language"] = "Binary",
+		["Speaktype"] = "whirrs",
+	};
+	["Lizard"] = {
+		["Language"] = BCT["Serpent"],
+		["Speaktype"] = "hisses",
+	};
+	["Krolusk"] = {
+		["Language"] = BCT["Serpent"],
+		["Speaktype"] = "hisses",
+	};
+	["Toad"] = {
+		["Language"] = "Riverbeast",
+		["Speaktype"] = "croaks",
 	};
 };
