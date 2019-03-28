@@ -241,18 +241,18 @@ Tongues.PetTable = {
 		["Speaktype"] = "roars",
 	};
 	["Scalehide"] = {
-		["Language"] = "Clefthoof",
+		["Language"] = BCT["Serpent"],
 		["Speaktype"] = "roars",
 	};
 	["Feathermane"] = {
-		["Language"] = "Bird",
+		["Language"] = T_Bird,
 	};
 	["Mechanical"] = {
 		["Language"] = "Binary",
 		["Speaktype"] = "whirrs",
 	};
 	["Lizard"] = {
-		["Language"] = BCT["Serpent"],
+		["Language"] = "Lizard",
 		["Speaktype"] = "hisses",
 	};
 	["Krolusk"] = {
@@ -262,5 +262,9 @@ Tongues.PetTable = {
 	["Toad"] = {
 		["Language"] = "Riverbeast",
 		["Speaktype"] = "croaks",
+	};
+	["Pterrordaxe"] = {
+		["Language"] = "Pterrordaxe",
+		["Speaktype"] = "screeches",
 	};
 };

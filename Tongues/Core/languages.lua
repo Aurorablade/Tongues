@@ -987,6 +987,8 @@ Tongues.Language[BCT["Devilsaur"]] = Tongues.Language[BCT["Serpent"]];
 Tongues.Language[BCT["Raptor"]] = Tongues.Language[BCT["Serpent"]];
 Tongues.Language[BCT["Dragonhawk"]] = Tongues.Language[BCT["Serpent"]];
 Tongues.Language["Direhorn"] = Tongues.Language[BCT["Serpent"]];
+Tongues.Language["Pterrordaxe"] = Tongues.Language[BCT["Serpent"]];
+Tongues.Language["Lizard"] = Tongues.Language[BCT["Serpent"]];
 -----------------------------------------------------------------------------------------------
 -- Language: Ursine 
 Tongues.Language[T_Ursine] = { 
