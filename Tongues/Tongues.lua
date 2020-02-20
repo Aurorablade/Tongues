@@ -1403,7 +1403,9 @@ HandleSend = function(self, msg, chatType, langID, language, channel)--HANDLE TE
 						else
 							s = T_Moonkin;
 						end
-	
+						
+					elseif name == "Treant Form" then
+						s = T_Trentish;
 					
 					elseif name == "Flight Form" or name == "Swift Flight Form" then
 					 if UnitRace("player")==BRAC["Troll"] then
