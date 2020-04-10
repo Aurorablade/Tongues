@@ -443,7 +443,7 @@ end;
 					self.Settings.Character.Language = T_Dwarvish
 				elseif UnitRace("player") == BRAC["Undead"] then
 					self.Settings.Character.Language = T_Forsaken
-				elseif UnitRace("player") == BRAC["Gnome"] then
+				elseif (UnitRace("player") == BRAC["Gnome"] or UnitRace("player") == "Mechagnome") then
 					self.Settings.Character.Language = T_Gnomish
 				elseif UnitRace("player") == BRAC["Troll"] or UnitRace("player") == "Zandalari Troll" then
 					self.Settings.Character.Language = "Zandali"

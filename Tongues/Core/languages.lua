@@ -1942,6 +1942,54 @@ Tongues.Language["Orca"].Difficulty = {
 };
 
 
+Tongues.Language["Shath'Yar"] = {
+    [1] = { "ag", "ak", "ez", "zz", "mh", "uq", "za", "sk" },
+    [2] = { "ag", "ak", "ez", "zz", "mh", "uq", "za", "sk", "ma", "qi" },
+    [3] = { "erh", "fhn", "gag", "gaz", "hoq", "mah", "maq", "nuq","oou", "qam", "qor", "qov", "shg", "tek", "uhn", "wah","zuq" },
+    [4] = {"h'iwn", "agth", "aqev", "fash", "fssh", "kyth", "magg", "naus", "okom", "puul", "qwaz", "thoq", "uull", "worg", "yahf", "ywaq", "zaix", "zzof"},
+    [5] = {"agthu", "huqth", "ilfah", "ilith", "lwhuk", "plahf", "shath", "shuul", "sythn", "thyzz", "uulwi", "uuyat", "vorzz", "yyqzz"},
+    [6] = {"kaaxth", "eqnizz", "halahs", "iggksh", "naggwa", "plahf", "skshgn", "ssaggh", "thyzak", "uhn'agh", "uhnish", "uovssh", "yeh'glu"},
+    [6] = {"kaaxth", "eqnizz", "halahs", "iggksh", "naggwa", "plahf", "skshgn", "ssaggh", "thyzak", "uhn'agh", "uhnish", "uovssh", "yeh'glu"},
+    [7] = {"agthshi", "gul'kafh", "iiqaath", "vwahuhn", },
+    [8] = { "Shath'gral", "Shuul'wah",}
+};
+
+Tongues.Language[T_Kalimag]["substitute"] = {
+	["old god"] = "Shath'Yar",
+	["old gods"] = "Shath'Yar",
+	["black empire"] = "Shath'mag"
+};
+
+Tongues.Language["Shath'Yar"].Difficulty = {
+	["default"] 	= 1000;
+
+	[BFAC["Alliance"]] 	= 0;
+	[BFAC["Horde"]] 	= 0;
+
+	[BRAC["Human"]]	= 100;
+	[BRAC["Dwarf"]] 	= 100;
+	[BRAC["Gnome"]] 	= 100;
+	[BRAC["Night Elf"]] 	= 100;
+	[BRAC["Draenei"]]	= 100;
+
+	[BRAC["Orc"]]	=100;
+	[BRAC["Troll"]]	= 100;
+	[BRAC["Undead"]]	= 100;
+	[BRAC["Tauren"]]	= 100;
+	[BRAC["Blood Elf"]]	= 100;
+
+	["Warrior"]	= 0;
+	["Rogue"]	= 0;
+	["Druid"]	= 0;
+	["Mage"]	= 0;
+	["Warlock"]	= 0;
+	["Paladin"]	= 0;
+	["Priest"]	= -1000;
+	["Shaman"]	= 0;
+	["Hunter"]	= 0;
+	["Death Knight"]= 0;
+};
+
 
 
 
