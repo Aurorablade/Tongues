@@ -15,6 +15,7 @@ local BRAC = LibStub("LibBabble-Race-3.0"):GetLookupTable()
 local BFAC = LibStub("LibBabble-Faction-3.0"):GetLookupTable()
 local BCT = LibStub("LibBabble-CreatureType-3.0"):GetLookupTable()
 local _,Tclass,_ = UnitClass("player")
+local TONGUES_NONE = "<None>";
 
 
 local Tclasses = {}
@@ -98,12 +99,12 @@ Tongues = Class:inherits(Tongues,{
 			Fluency = {};
 			--LD = {};
 
-			Dialect  = "<None>";
+			Dialect  = TONGUES_NONE;
 
-			Affect	 = "<None>";
+			Affect	 = TONGUES_NONE;
 			AffectFrequency = 100;
 
-			Filter   = "<None>";
+			Filter   = TONGUES_NONE;
 
 			Faction = "";
 			Race    = "";
@@ -168,7 +169,7 @@ Tongues = Class:inherits(Tongues,{
 		if param ~= nil then
 			Tongues:SetDialect(param[1]);
 		else
-			Tongues:SetDialect("<None>");
+			Tongues:SetDialect(TONGUES_NONE);
 		end;
 	end;
 	
@@ -417,13 +418,13 @@ end;
 			end;
 
 			if self.Dialect[self.Settings.Character.Dialect] == nil then
-				self.Settings.Character.Dialect = "<None>";
+				self.Settings.Character.Dialect = TONGUES_NONE;
 			end;
 			if self.Affect[self.Settings.Character.Affect] == nil then
-				self.Settings.Character.Affect = "<None>";
+				self.Settings.Character.Affect = TONGUES_NONE;
 			end;
 			if self.Filter[self.Settings.Character.Filter] == nil then
-				self.Settings.Character.Filter = "<None>";
+				self.Settings.Character.Filter = TONGUES_NONE;
 			end;
 
 			if self.Settings.Character.Language == nil then
@@ -1652,11 +1653,28 @@ end		]]
 		
 	end;
 	
+	-- Returns currently set language
+	GetLanguage = function(self)
+		return Tongues.Settings.Character.Language;
+	end;
+	
 	SetDialect = function(self, dialect)
 		Lib_UIDropDownMenu_ClearAll(self.UI.MainMenu.Speak.DialectDropDown.Frame)
 		Tongues.Settings.Character.Dialect = dialect
 		Lib_UIDropDownMenu_SetSelectedValue(Tongues.UI.MainMenu.Speak.DialectDropDown.Frame, dialect)
 	end;
+	
+	-- Returns currently set languages dialect or nil if none
+	GetDialect = function(self)
+		local dialect = Tongues.Settings.Character.Dialect;
+		
+		if dialect == TONGUES_NONE then
+			return nil;
+		end;
+		
+		return dialect;
+	end;
+	
 	---------------------------------------------------------------------------------------
 	CycleLanguage = function(self)
 		local t = {};
