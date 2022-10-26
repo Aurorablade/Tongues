@@ -1,0 +1,10 @@
+lightweight tag d56fa8d2f754feb3bc63f21d24e1f870a932fccb v1.0.7
+Author:	Eliote <>
+Date:	Wed Sep 7 17:11:17 2022 -0300
+
+commit d56fa8d2f754feb3bc63f21d24e1f870a932fccb
+Author: Eliote <>
+Date:   Wed Sep 7 17:11:17 2022 -0300
+
+    Fix error when menu list is empty
+

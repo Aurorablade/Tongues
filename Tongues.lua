@@ -1,5 +1,5 @@
 ----------------------------------------------------------------------------------------------------------
-	Tongues.Version = GetAddOnMetadata("Tongues", "Version");								--
+Tongues.Version = GetAddOnMetadata("Tongues", "Version");					
 --	Note: This is completely inspired by the Lore 7.5.7 AddOn					--
 --	I decided to take a different approach, and as I got more into it I started having		--
 --	problems doing further modification (mostly with the XML,) it just seemed better to		--
@@ -16,6 +16,8 @@ local BFAC = LibStub("LibBabble-Faction-3.0"):GetLookupTable()
 local BCT = LibStub("LibBabble-CreatureType-3.0"):GetLookupTable()
 local _,Tclass,_ = UnitClass("player")
 local TONGUES_NONE = "<None>";
+local VERSIONSUPPORTSFACTIONPICK = LE_EXPANSION_MISTS_OF_PANDARIA or 4;
+local EDDM = LibStub("ElioteDropDownMenu-1.0")
 
 
 local Tclasses = {}
@@ -185,15 +187,15 @@ Tongues = Class:inherits(Tongues,{
 			if param[1] ~= nil and string.lower(param[1]) == "help" then
 				for i=1,NUM_CHAT_WINDOWS do
 					_G["ChatFrame" .. i ]:AddMessage("Tongues Commands: "			,1,1,0)
-					_G["ChatFrame" .. i ]:AddMessage("   <language>"				,1,1,0)
-					--getglobal("ChatFrame" .. i ):AddMessage("   Language <language>"		,1,1,0)
-					--getglobal("ChatFrame" .. i ):AddMessage("   Dialect <dialect>"			,1,1,0)
-					--getglobal("ChatFrame" .. i ):AddMessage("   Affect <affect>"			,1,1,0)
-					--getglobal("ChatFrame" .. i ):AddMessage("   Filter <filter>"			,1,1,0)
-					--getglobal("ChatFrame" .. i ):AddMessage("   LoreCompatible <true|false>"	,1,1,0)
-					--getglobal("ChatFrame" .. i ):AddMessage("   DialectDrift <true|false>"		,1,1,0)
-					--getglobal("ChatFrame" .. i ):AddMessage("   Shapeshift <true|false>"		,1,1,0)
-					_G["ChatFrame" .. i ]:AddMessage("   Help"				,1,1,0)
+					_G["ChatFrame" .. i ]:AddMessage("   <language>(just /tongues and language to speak a language)"				,1,1,0)
+					_G["ChatFrame" .. i ]:AddMessage("   Shapeshift <true|false>"		,1,1,0)
+					_G["ChatFrame" .. i ]:AddMessage("   Cycle <cycle through languages"		,1,1,0)
+					_G["ChatFrame" .. i ]:AddMessage("   Dialect <Chosen Dialect>"		,1,1,0)
+					_G["ChatFrame" .. i ]:AddMessage("   Remove <Language to remove CASE SENSATIVE>"		,1,1,0)
+					_G["ChatFrame" .. i ]:AddMessage("   Remove <Language to add CASE SENSATIVE> <FLUANCY>"		,1,1,0)
+					_G["ChatFrame" .. i ]:AddMessage("   List List all Lanugages"		,1,1,0)
+					_G["ChatFrame" .. i ]:AddMessage("   Translate <Name> - Add or remove a translater(if they aren't on ther list it adds, if they are it removes)"		,1,1,0)
+					_G["ChatFrame" .. i ]:AddMessage("   Help - this message"				,1,1,0)
 				end;
 			elseif param[1] ~= nil and string.lower(param[1]) == "language" then
 				if param[2] ~= nil then
@@ -204,11 +206,7 @@ Tongues = Class:inherits(Tongues,{
 
 			elseif param[1] ~= nil and string.lower(param[1]) == "filter" then
 
-			elseif param[1] ~= nil and string.lower(param[1]) == "lorecompatible" then
-
-			elseif param[1] ~= nil and string.lower(param[1]) == "dialectdrift" then
-
-			elseif param[1] ~= nil and string.lower(param[1]) == "shapeshift" then
+		    elseif param[1] ~= nil and string.lower(param[1]) == "shapeshift" then
 					if Tongues.Settings.Character.ShapeshiftLanguage == true then
 						Tongues.Settings.Character.ShapeshiftLanguage = false;
 					else
@@ -225,6 +223,12 @@ Tongues = Class:inherits(Tongues,{
                --if countLangauge() ~= 1 then
 			   Tongues:CycleLanguage();
 			   --end
+			   
+			elseif param[1] ~= nil and string.lower(param[1]) == "list" then
+						DEFAULT_CHAT_FRAME:AddMessage("Known Languages:");
+						for k,v in pairs(Tongues.Settings.Character.Fluency) do
+							DEFAULT_CHAT_FRAME:AddMessage(k .. " = " .. v .. "%")
+						end;
 			elseif param[1] ~= nil and string.lower(param[1]) == "remove" then
 			
 		           if param[2] ~= nil then
@@ -236,7 +240,28 @@ Tongues = Class:inherits(Tongues,{
 							Tongues.Settings.Character.Fluency[Tongues:GetRealLanguage(param[2])] = nil;
 							end
 				       end
+			elseif param[1] ~= nil and string.lower(param[1]) == "add" then
 			
+		        if param[2] ~= nil then
+				      if param[3] ~= nil then
+					     lang=param[2]
+						
+							Tongues.Settings.Character.Fluency[Tongues:GetRealLanguage(lang)] = param[3];
+							else
+							Tongues.Settings.Character.Fluency[Tongues:GetRealLanguage(param[2])] = param[3];
+							end
+				       end
+			elseif param[1] ~= nil and string.lower(param[1]) == "translate" then
+				
+					if param[2] ~= nil then
+						if Tongues:FindTranslator(param[2])==false then
+							Tongues:AddTranslator(param[2]);
+							DEFAULT_CHAT_FRAME:AddMessage("Added " .. param[2] .. " to the Translator list")
+						else
+							Tongues:RemoveTranslator(Tongues.UI.MainMenu.Translators.TranslatorEditbox.Frame:GetText());
+							DEFAULT_CHAT_FRAME:AddMessage("Removed " .. param[2] .. " from the Translator list")
+						end
+					end
 			elseif param[1] ~= nil then
 				Tongues:SetLanguage(param[1]);
 			end;
@@ -498,7 +523,7 @@ end;
 				
 				end;
 			end;
-			Lib_UIDropDownMenu_Initialize(Tongues.UI.MainMenu.Speak.LanguageDropDown.Frame, Tongues.UpdateLanguageDropDown);	
+			--Lib_UIDropDownMenu_Initialize(Tongues.UI.MainMenu.Speak.LanguageDropDown.Frame, Tongues.UpdateLanguageDropDown);	
 			
 			
 			self:SetLanguage(self.Settings.Character.Language);
@@ -507,12 +532,12 @@ end;
 			----------------------
 			self.Settings.Global = Tongues_Global;
 			self.UI:LoadDefaults();
-        elseif event == "NEUTRAL_FACTION_SELECT_RESULT" then--FOR PANDAS
-			if UnitFactionGroup("player") == BFAC["Alliance"] then
-				  --print("hit")
-					self.Settings.Character.Fluency[T_Common] = Tongues_Character.Fluency[T_Common] or 100
+        elseif LE_EXPANSION_LEVEL_CURRENT >= VERSIONSUPPORTSFACTIONPICK and event == "NEUTRAL_FACTION_SELECT_RESULT" then
+		   	if UnitFactionGroup("player") == BFAC["Alliance"] then
+				--print("hit")
+				self.Settings.Character.Fluency[T_Common] = Tongues_Character.Fluency[T_Common] or 100
 			elseif UnitFactionGroup("player") == BFAC["Horde"] then
-					self.Settings.Character.Fluency[T_Orcish] = Tongues_Character.Fluency[T_Orcish] or 100
+				self.Settings.Character.Fluency[T_Orcish] = Tongues_Character.Fluency[T_Orcish] or 100
 			end;
 		elseif event == "UPDATE_CHAT_COLOR" then
 		  local typec, red,green,blue = ...;
@@ -587,7 +612,9 @@ end;
 
 		self.Frame = CreateFrame("Frame",nil,UIParent);
 		self.Frame:RegisterEvent("ADDON_LOADED");
-		self.Frame:RegisterEvent("NEUTRAL_FACTION_SELECT_RESULT")
+		if LE_EXPANSION_LEVEL_CURRENT >= VERSIONSUPPORTSFACTIONPICK then
+			self.Frame:RegisterEvent("NEUTRAL_FACTION_SELECT_RESULT")
+		end
 		self.Frame:RegisterEvent("VARIABLES_LOADED");
 		self.Frame:RegisterEvent("CHAT_MSG_ADDON");
 		self.Frame:RegisterEvent("UPDATE_CHAT_COLOR");
@@ -1635,17 +1662,14 @@ TranslateWord = function(self,word,s)
 end		]]
 		
 			
-		Lib_UIDropDownMenu_ClearAll(self.UI.MainMenu.Speak.LanguageDropDown.Frame);
+		EDDM.UIDropDownMenu_ClearAll(self.UI.MainMenu.Speak.LanguageDropDown.dropdownFrame);
 		 
 		self.Settings.Character.Language = language;
 		print("now speaking: "..language)
 		self.UI.MiniMenu.Frame:SetText("Tongues\10" .. Tongues.Settings.Character.Language);
-        tBroker.value =  Tongues_Character.Language;	--LDB Display cycle--Merge to Tongues 2		
-		
-		Lib_UIDropDownMenu_Initialize(Tongues.UI.MainMenu.Speak.LanguageDropDown.Frame, Tongues.UpdateLanguageDropDown);
-		Lib_UIDropDownMenu_SetSelectedValue(self.UI.MainMenu.Speak.LanguageDropDown.Frame, language);
-		
-		---Linked Dialect
+        --tBroker.value =  Tongues_Character.Language;	--LDB Display cycle--Merge to Tongues 2		
+					
+		--Linked Dialect
 		--Lib_UIDropDownMenu_Initialize(Tongues.UI.MainMenu.Speak.DialectDropDown.Frame, Tongues.UpdateDialect)
 		--UIDropDownMenu_SetSelectedValue(Tongues.UI.MainMenu.Speak.DialectDropDown.Frame, DiaD)
 		
@@ -1659,9 +1683,9 @@ end		]]
 	end;
 	
 	SetDialect = function(self, dialect)
-		Lib_UIDropDownMenu_ClearAll(self.UI.MainMenu.Speak.DialectDropDown.Frame)
+		EDDM.UIDropDownMenu_ClearAll(self.UI.MainMenu.Speak.DialectDropDown.dropdownFrame)
 		Tongues.Settings.Character.Dialect = dialect
-		Lib_UIDropDownMenu_SetSelectedValue(Tongues.UI.MainMenu.Speak.DialectDropDown.Frame, dialect)
+		Lib_UIDropDownMenu_SetSelectedValue(Tongues.UI.MainMenu.Speak.DialectDropDown.dropdownFrame, dialect)
 	end;
 	
 	-- Returns currently set languages dialect or nil if none

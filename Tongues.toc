@@ -1,6 +1,6 @@
-## Interface: 90000
+## Interface: 100000
 ## Title: Tongues
-## Version:1.9
+## Version:1.10
 ## Notes: Create and use custom-defined languages, dialects, effects, and filters.
 ## DefaultState: Enabled
 ## Author: (Original)Skrull Adams (maintainer)Aurorablade/Fethas
@@ -12,9 +12,7 @@
 ## -----------------------------------------------------------
 
 Core\LibStub\LibStub.lua
-libs\DropDownMenu\UIDropDownMenuTemplates.xml
-libs\DropDownMenu\UIDropDownMenu.lua
-libs\DropDownMenu\EasyMenu.lua
+libs\ElioteDropDownMenu-1.0\ElioteDropDownMenu-1.0.lua
 Core\CallBackHandler-1.0\CallBackHandler-1.0.xml
 Core\LibDataBroker-1.1.lua
 libs\AceComm-3.0\AceComm-3.0.xml

@@ -1,4 +1,4 @@
-
+local EDDM = LibStub("ElioteDropDownMenu-1.0")
 
 local function BoolToNum(boolvalue)
 	local numval = nil;
@@ -11,6 +11,8 @@ local function BoolToNum(boolvalue)
 end;
 --=============================================================================================
 	Tongues.UI = {
+		Frame;
+		
 		Configure = function(self)
 			self.MiniMenu:Configure();
 			self.MainMenu:Configure();
@@ -48,22 +50,22 @@ end;
 
 			Tongues.UI.MainMenu.Speak.ShapeshiftLanguage.Frame:SetChecked(Tongues.Settings.Character.ShapeshiftLanguage)
 
-			Lib_UIDropDownMenu_SetSelectedValue(Tongues.UI.MainMenu.Speak.LanguageDropDown.Frame, Tongues.Settings.Character.Language); 
+			EDDM.UIDropDownMenu_SetSelectedValue(Tongues.UI.MainMenu.Speak.LanguageDropDown.dropdownFrame, Tongues.Settings.Character.Language); 
 			--**WOTLK FIX
-			Lib_UIDropDownMenu_SetText(Tongues.UI.MainMenu.Speak.LanguageDropDown.Frame, Tongues.Settings.Character.Language);
+			EDDM.UIDropDownMenu_SetText(Tongues.UI.MainMenu.Speak.LanguageDropDown.dropdownFrame, Tongues.Settings.Character.Language);
 		
-			Lib_UIDropDownMenu_SetSelectedValue(Tongues.UI.MainMenu.Speak.AffectDropDown.Frame,Tongues.Settings.Character.Affect); 
+			EDDM.UIDropDownMenu_SetSelectedValue(Tongues.UI.MainMenu.Speak.AffectDropDown.dropdownFrame,Tongues.Settings.Character.Affect); 
 			--**WOTLK FIX
-			Lib_UIDropDownMenu_SetText(Tongues.UI.MainMenu.Speak.AffectDropDown.Frame, Tongues.Settings.Character.Affect);
+			EDDM.UIDropDownMenu_SetText(Tongues.UI.MainMenu.Speak.AffectDropDown.dropdownFrame, Tongues.Settings.Character.Affect);
 			
-			Lib_UIDropDownMenu_SetSelectedValue(Tongues.UI.MainMenu.Speak.DialectDropDown.Frame,Tongues.Settings.Character.Dialect);
+			EDDM.UIDropDownMenu_SetSelectedValue(Tongues.UI.MainMenu.Speak.DialectDropDown.dropdownFrame,Tongues.Settings.Character.Dialect);
 			
 			--**WOTLK FIX
-			Lib_UIDropDownMenu_SetText(Tongues.UI.MainMenu.Speak.DialectDropDown.Frame, Tongues.Settings.Character.Dialect);
+			EDDM.UIDropDownMenu_SetText(Tongues.UI.MainMenu.Speak.DialectDropDown.dropdownFrame, Tongues.Settings.Character.Dialect);
 
-			Lib_UIDropDownMenu_SetSelectedValue(Tongues.UI.MainMenu.Hear.Filter.Frame,Tongues.Settings.Character.Filter);
+			EDDM.UIDropDownMenu_SetSelectedValue(Tongues.UI.MainMenu.Hear.Filter.dropdownFrame,Tongues.Settings.Character.Filter);
 			--**WOTLK FIX
-			Lib_UIDropDownMenu_SetText(Tongues.UI.MainMenu.Hear.Filter.Frame, Tongues.Settings.Character.Filter);
+			EDDM.UIDropDownMenu_SetText(Tongues.UI.MainMenu.Hear.Filter.dropdownFrame, Tongues.Settings.Character.Filter);
 
 			Tongues.UI.MiniMenu.Frame:SetPoint(Tongues.Settings.Character.UI.MiniMenu.point, UIParent, Tongues.Settings.Character.UI.MiniMenu.relativePoint, Tongues.Settings.Character.UI.MiniMenu.xOfs, Tongues.Settings.Character.UI.MiniMenu.yOfs);
 			Tongues.UI.MainMenu.Frame:SetPoint(Tongues.Settings.Character.UI.MainMenu.point, UIParent, Tongues.Settings.Character.UI.MainMenu.relativePoint, Tongues.Settings.Character.UI.MainMenu.xOfs, Tongues.Settings.Character.UI.MainMenu.yOfs);
@@ -75,7 +77,7 @@ end;
 
 			Tongues.UI.MainMenu.Speak.LanguageLearn.Frame:SetChecked(Tongues.Settings.Character.LanguageLearning);
 			
-			InterfaceOptions_AddCategory(Tongues.UI.MainMenu.Frame);
+			--InterfaceOptions_AddCategory(Tongues.UI.MainMenu.Frame);
 		end;
 
 		MiniMenu = {
@@ -98,8 +100,8 @@ end;
 				--self.texture[1]:SetTexture("Interface\\Icons\\Spell_Shadow_SoulLeech")
 				--self.texture[1]:SetAllPoints();
 				self.Frame:EnableMouse(true);
-				self.Frame:RegisterForDrag("LeftButton");
-				self.Frame:RegisterForClicks("RightButton");
+				self.Frame:RegisterForDrag("LeftButtonDown");
+				self.Frame:RegisterForClicks("RightButtonDown");
 				
 				self.Frame:Show();
 			end;
@@ -146,30 +148,30 @@ end;
 		    	    	self.Frame:SetHeight(440)
 		    	    	self.Frame:SetPoint("CENTER", UIParent, "CENTER", 0,0);
 
-				self.texture[1] = self.Frame:CreateTexture("settings","BORDER")
+				self.texture[1] = self.Frame:CreateTexture("settings",nil)
 				self.texture[1]:SetTexture("Interface\\PaperDollInfoFrame\\UI-Character-General-TopLeft")
 				self.texture[1]:SetPoint("TOPLEFT", self.Frame, "TOPLEFT", -4, 0);
-				self.texture[3] = self.Frame:CreateTexture("settings","BORDER")
+				self.texture[3] = self.Frame:CreateTexture("settings",nil)
 				self.texture[3]:SetTexture("Interface\\PaperDollInfoFrame\\UI-Character-General-TopRight")
 				self.texture[3]:SetPoint("TOPRIGHT", self.Frame, "TOPRIGHT", 32, 0);
-				self.texture[4] = self.Frame:CreateTexture("settings","BORDER")
+				self.texture[4] = self.Frame:CreateTexture("settings",nil)
 				self.texture[4]:SetTexture("Interface\\PaperDollInfoFrame\\UI-Character-General-BottomLeft")
 				self.texture[4]:SetPoint("BOTTOMLEFT", self.Frame, "BOTTOMLEFT", -4, -72);
-				self.texture[5] = self.Frame:CreateTexture("settings","BORDER")
+				self.texture[5] = self.Frame:CreateTexture("settings",nil)
 				self.texture[5]:SetTexture("Interface\\PaperDollInfoFrame\\UI-Character-General-BottomRight")
 				self.texture[5]:SetPoint("BOTTOMRIGHT", self.Frame, "BOTTOMRIGHT", 32, -72);
-				self.text[1] = self.Frame:CreateFontString("settings","BUTTON")
+				self.text[1] = self.Frame:CreateFontString("settings",nil)
 				self.text[1]:SetFont(GameFontNormal:GetFont(),12);
 				self.text[1]:SetText('|cffffffffTongues Menu|r')
 				self.text[1]:SetPoint("TOP", self.Frame, "TOP", 10, -16);
-				self.text[2] = self.Frame:CreateFontString("settings","BUTTON")
+				self.text[2] = self.Frame:CreateFontString("settings",nil)
 				self.text[2]:SetFont(GameFontNormal:GetFont(),12);
 				self.text[2]:SetText('|cffffff00v ' .. Tongues.Version .. '|r')
 				self.text[2]:SetPoint("TOP", self.Frame, "TOP", 10, -50);
 
 				self.Frame:EnableMouse(true);
 				--self.Frame:EnableKeyboard(true);
-				self.Frame:RegisterForDrag("LeftButton");
+				self.Frame:RegisterForDrag("LeftButtonDown");
 
 				self.Minimize:Configure();
 				self.CloseButton:Configure();
@@ -229,7 +231,7 @@ end;
 					self.Frame:SetPoint("TOPLEFT",Tongues.UI.MainMenu.Frame, "TOPLEFT", 20, -80);
 
 					self.Frame:EnableMouse(true);
-					self.Frame:RegisterForClicks("LeftButton");
+					self.Frame:RegisterForClicks("LeftButtonDown");
 					self.Frame:Show();
 				end;
 
@@ -259,7 +261,7 @@ end;
 					self.Frame:SetPoint("LEFT",Tongues.UI.MainMenu.SpeakButton.Frame, "RIGHT", 0, 0);
 
 					self.Frame:EnableMouse(true);
-					self.Frame:RegisterForClicks("LeftButton");
+					self.Frame:RegisterForClicks("LeftButtonDown");
 					self.Frame:Show();
 				end;
 
@@ -289,7 +291,7 @@ end;
 					self.Frame:SetPoint("LEFT",Tongues.UI.MainMenu.UnderstandButton.Frame, "RIGHT", 0, 0);
 
 					self.Frame:EnableMouse(true);
-					self.Frame:RegisterForClicks("LeftButton");
+					self.Frame:RegisterForClicks("LeftButtonDown");
 					self.Frame:Show();
 				end;
 
@@ -337,60 +339,44 @@ end;
 				---------------------------------------------------------------------------------------------
 				LanguageDropDown = {
 					Frame;
-					texture  = {};
-					text	 = {};
+					dropdownFrame = EDDM.UIDropDownMenu_GetOrCreate("LanguageDD");
 				
 					Configure = function(self)
-						self.Frame = CreateFrame("Button", "LanguageDownMenu", Tongues.UI.MainMenu.Speak.Frame, "Lib_UIDropDownMenuTemplate"); 
-						self.Frame:SetPoint("LEFT",Tongues.UI.MainMenu.Speak.Frame, "TOPLEFT", 55, -20);
-
-						self.text[2] = self.Frame:CreateFontString("settings","BUTTON")
-						self.text[2]:SetFont(GameFontNormal:GetFont(),12);
-						self.text[2]:SetText('|cffffffffLanguage|r')
-						self.text[2]:SetPoint("LEFT", self.Frame, "LEFT", -55, 0 ); 
-						--UIDropDownMenu_Initialize(self.Frame, self.Initialize);	
+						EDDM.UIDropDownMenu_Initialize(self.dropdownFrame, self.Initialize, "MENU");
 		
-						self.Frame:Show();
 					end;
 				
-					--Initialize = function()
-					--	local info            = {};
-					--	local k,v;
-					--
-					--	for k,v in Tongues.PairsByKeys(Tongues.Language) do
-					--		local fluency = Tongues.Settings.Character.Fluency[k] or 0
-					--		if fluency >= 30 then
-					--			info.text       = k;
-					--			info.value      = k;
-					--			info.checked 	= nil; 
-					--			info.func       = Tongues.UI.MainMenu.Speak.LanguageDropDown.OnClick;
-					--			UIDropDownMenu_AddButton(info);
-					--		end;
-					--	end;		
-					--end;
+					Initialize = function()
+						local info            = {};
+						local k,v;
+					
+						for k,v in Tongues.PairsByKeys(Tongues.Language) do
+							local fluency = Tongues.Settings.Character.Fluency[k] or 0
+							if fluency >= 30 then
+								info.text       = k;
+								info.value      = k;
+								info.checked 	= nil; 
+								info.func       = Tongues.UI.MainMenu.Speak.LanguageDropDown.OnClick;
+								EDDM.UIDropDownMenu_AddButton(info);
+							end;
+						end;		
+					end;
 				
 					OnClick = function(self)
 					 --lang = UIDropDownMenu_GetSelectedValue("LanguageDownMenu") 
 						Tongues:SetLanguage(self.value)
+						EDDM.ToggleDropDownMenu(1, nil, self.dropdownFrame, "cursor", 3, -3);
 					end;
 				};
 				---------------------------------------------------------------------------------------------
 				DialectDropDown = {
-					Frame;
-					texture  = {};
-					text	 = {};
-				
+
+					dropdownFrame = EDDM.UIDropDownMenu_GetOrCreate("DialectDD");				
+					
 					Configure = function(self)
-						self.Frame = CreateFrame("Button", "DialectDownMenu", Tongues.UI.MainMenu.Speak.Frame, "Lib_UIDropDownMenuTemplate"); 
-						self.Frame:SetPoint("LEFT",Tongues.UI.MainMenu.Speak.Frame, "TOPLEFT", 55, -45); 	
-						self.text[1] = self.Frame:CreateFontString("settings","BUTTON")
-						self.text[1]:SetFont(GameFontNormal:GetFont(),12);
-						self.text[1]:SetText('|cffffffffDialect|r')
-						self.text[1]:SetPoint("LEFT", self.Frame, "LEFT", -55, 0 );
-	
-						Lib_UIDropDownMenu_Initialize(self.Frame, self.Initialize);
-						
-						self.Frame:Show();
+				
+						EDDM.UIDropDownMenu_Initialize(self.dropdownFrame, self.Initialize, "MENU");
+					
 					end;
 				
 					Initialize = function()
@@ -401,34 +387,25 @@ end;
 							info.value      = k;
 							info.checked = nil; 
 							info.func       = Tongues.UI.MainMenu.Speak.DialectDropDown.OnClick;
-							Lib_UIDropDownMenu_AddButton(info);
+							EDDM.UIDropDownMenu_AddButton(info);
 						end;		
 					end;
 				
 					OnClick = function(self)
-						Lib_UIDropDownMenu_ClearAll(Tongues.UI.MainMenu.Speak.DialectDropDown.Frame);
-						Lib_UIDropDownMenu_SetSelectedValue(Tongues.UI.MainMenu.Speak.DialectDropDown.Frame, self.value)
+						EDDM.UIDropDownMenu_ClearAll(Tongues.UI.MainMenu.Speak.DialectDropDown.dropdownFrame);
+						EDDM.UIDropDownMenu_SetSelectedValue(Tongues.UI.MainMenu.Speak.DialectDropDown.dropdownFrame, self.value)
 						--print(UIDropDownMenu_GetSelectedValue(Tongues.UI.MainMenu.Speak.DialectDropDown.Frame:GetText()))
 						Tongues:SetDialect(self.value)--Tongues.UI.MainMenu.Speak.DialectDropDown.Frame.value
+						EDDM.ToggleDropDownMenu(1, nil, self.dropdownFrame, "cursor", 3, -3);
 					end;
 				};
 				---------------------------------------------------------------------------------------------
 				AffectDropDown = {
-					Frame;
-					texture  = {};
-					text	 = {};
-				
+					
+					dropdownFrame = EDDM.UIDropDownMenu_GetOrCreate("AffectDD");					
 					Configure = function(self)
-						self.Frame = CreateFrame("Button", "AffectDownMenu", Tongues.UI.MainMenu.Speak.Frame, "Lib_UIDropDownMenuTemplate"); 
-						self.Frame:SetPoint("LEFT",Tongues.UI.MainMenu.Speak.Frame, "TOPLEFT", 55, -70); 	
-						self.text[1] = self.Frame:CreateFontString("settings","BUTTON")
-						self.text[1]:SetFont(GameFontNormal:GetFont(),12);
-						self.text[1]:SetText('|cffffffffAffect|r')
-						self.text[1]:SetPoint("LEFT", self.Frame, "LEFT", -55, 0 );
-	
-						Lib_UIDropDownMenu_Initialize(self.Frame, self.Initialize);		
-						self.Frame:Show();
-					end;
+						EDDM.UIDropDownMenu_Initialize(self.dropdownFrame, self.Initialize, "MENU");
+						end;
 				
 					Initialize = function()
 						local info            = {};
@@ -438,15 +415,16 @@ end;
 							info.value      = k;
 							info.checked = nil; 
 							info.func       = Tongues.UI.MainMenu.Speak.AffectDropDown.OnClick;
-							Lib_UIDropDownMenu_AddButton(info);
+							EDDM.UIDropDownMenu_AddButton(info);
 						end;		
 					end;
 				
 					OnClick = function(self)
-						Lib_UIDropDownMenu_ClearAll(Tongues.UI.MainMenu.Speak.AffectDropDown.Frame);
-						Lib_UIDropDownMenu_SetSelectedValue(Tongues.UI.MainMenu.Speak.AffectDropDown.Frame, self.value); 
+						EDDM.UIDropDownMenu_ClearAll(Tongues.UI.MainMenu.Speak.AffectDropDown.dropdownFrame);
+						EDDM.UIDropDownMenu_SetSelectedValue(Tongues.UI.MainMenu.Speak.AffectDropDown.dropdownFrame, self.value); 
 						 --affct = UIDropDownMenu_GetSelectedValue("AffectDownMenu") 
 						Tongues.Settings.Character.Affect = self.value;
+						EDDM.ToggleDropDownMenu(1, nil, self.dropdownFrame, "cursor", 3, -3);
 					end;
 				};
 				---------------------------------------------------------------------------------------------
@@ -476,12 +454,12 @@ end;
 					text	 = {};
 		
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","DialectDrift", Tongues.UI.MainMenu.Speak.Frame,"OptionsCheckButtonTemplate");
+						self.Frame = CreateFrame("CheckButton","DialectDrift", Tongues.UI.MainMenu.Speak.Frame);
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
 		
-						self.text[1] = self.Frame:CreateFontString("settings","BUTTON")
+						self.text[1] = self.Frame:CreateFontString("settings",nil)
 						self.text[1]:SetFont(GameFontNormal:GetFont(),12);
 						self.text[1]:SetText('|cffffffffDialect Drift|r')
 						self.text[1]:SetPoint("LEFT", self.Frame, "LEFT",25, 0 );
@@ -491,7 +469,7 @@ end;
 						self.Frame:SetPoint("LEFT", Tongues.UI.MainMenu.Speak.Frame, "TOPLEFT",205,  -40);
 						self.Frame:SetText("CheckBox Thing");
 						self.Frame:EnableMouse(true);
-						self.Frame:RegisterForClicks("LeftButton");		
+						self.Frame:RegisterForClicks("LeftButtonDown");		
 						self.Frame:Show();
 					end;
 	
@@ -515,12 +493,12 @@ end;
 					text	 = {};
 		
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","LanguageLearn", Tongues.UI.MainMenu.Speak.Frame,"OptionsCheckButtonTemplate");
+						self.Frame = CreateFrame("CheckButton","LanguageLearn", Tongues.UI.MainMenu.Speak.Frame);
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
 		
-						self.text[1] = self.Frame:CreateFontString("settings","BUTTON")
+						self.text[1] = self.Frame:CreateFontString("settings",nil)
 						self.text[1]:SetFont(GameFontNormal:GetFont(),12);
 						self.text[1]:SetText('|cffffffffAutomatic Language Learning|r')
 						self.text[1]:SetPoint("LEFT", self.Frame, "LEFT",25, 0 );
@@ -530,7 +508,7 @@ end;
 						self.Frame:SetPoint("LEFT", Tongues.UI.MainMenu.Speak.Frame, "TOPLEFT",0,  -170);
 						self.Frame:SetText("CheckBox Thing");
 						self.Frame:EnableMouse(true);
-						self.Frame:RegisterForClicks("LeftButton");		
+						self.Frame:RegisterForClicks("LeftButtonDown");		
 						self.Frame:Show();
 					end;
 	
@@ -554,22 +532,22 @@ end;
 					text	 = {};
 		
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","ShapeShiftLanguage", Tongues.UI.MainMenu.Speak.Frame,"OptionsCheckButtonTemplate");
+						self.Frame = CreateFrame("CheckButton","ShapeShiftLanguage", Tongues.UI.MainMenu.Speak.Frame);
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
 		
-						self.text[1] = self.Frame:CreateFontString("settings","BUTTON")
+						self.text[1] = self.Frame:CreateFontString("settings",nil)
 						self.text[1]:SetFont(GameFontNormal:GetFont(),12);
 						self.text[1]:SetText('|cffffffffUse Shapeshifted Language|r')
 						self.text[1]:SetPoint("LEFT", self.Frame, "LEFT",25, 0 );
 		
 						self.Frame:SetWidth(25)
-				    	    	self.Frame:SetHeight(25)
+				    	self.Frame:SetHeight(25)
 						self.Frame:SetPoint("LEFT", Tongues.UI.MainMenu.Speak.Frame, "TOPLEFT", 0,  -150);
 						self.Frame:SetText("CheckBox Thing");
 						self.Frame:EnableMouse(true);
-						self.Frame:RegisterForClicks("LeftButton");		
+						self.Frame:RegisterForClicks("LeftButtonDown");		
 						self.Frame:Show();
 					end;
 		
@@ -599,28 +577,28 @@ end;
 					text	 = {};
 	
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","HideMiniF", Tongues.UI.MainMenu.Speak.Frame,"OptionsCheckButtonTemplate");
+						self.Frame = CreateFrame("CheckButton","HideMiniF", Tongues.UI.MainMenu.Speak.Frame);
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
 	
-						self.text[1] = self.Frame:CreateFontString("settings","BUTTON")
+						self.text[1] = self.Frame:CreateFontString("settings",nil)
 						self.text[1]:SetFont(GameFontNormal:GetFont(),12);
 						self.text[1]:SetText('|cffffffffHide\nMiniMenu|r')
 						self.text[1]:SetPoint("LEFT", self.Frame, "LEFT",25, 0 );
 	
 						self.Frame:SetWidth(25)
-				    	    	self.Frame:SetHeight(25)
+				    	self.Frame:SetHeight(25)
 						self.Frame:SetPoint("LEFT", Tongues.UI.MainMenu.Speak.Frame, "TOPLEFT",0, -130);
 						self.Frame:SetText("CheckBox Thing");
 	
 						self.Frame:EnableMouse(true);
-						self.Frame:RegisterForClicks("LeftButton");		
+						self.Frame:RegisterForClicks("LeftButtonDown");		
 						self.Frame:Show();
 					end;
 	
 					OnMouseUp = function(self)
-Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Speak.MiniHide.Frame:GetChecked());
+						Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Speak.MiniHide.Frame:GetChecked());
 
 						if (Tongues.UI.MainMenu.Speak.MiniHide.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.MMH = true;
@@ -642,12 +620,12 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 					text	 = {};
 		
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","LoreCompatibility", Tongues.UI.MainMenu.Speak.Frame,"OptionsCheckButtonTemplate");
+						self.Frame = CreateFrame("CheckButton","LoreCompatibility", Tongues.UI.MainMenu.Speak.Frame);
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
 		
-						self.text[1] = self.Frame:CreateFontString("settings","BUTTON")
+						self.text[1] = self.Frame:CreateFontString("settings",nil)
 						self.text[1]:SetFont(GameFontNormal:GetFont(),12);
 						self.text[1]:SetText('|cffffffffLore Compatibility|r')
 						self.text[1]:SetPoint("LEFT", self.Frame, "LEFT",25, 0 );
@@ -657,7 +635,7 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 						self.Frame:SetPoint("LEFT", Tongues.UI.MainMenu.Speak.Frame, "TOPLEFT", 0,  -130);
 						self.Frame:SetText("CheckBox Thing");
 						self.Frame:EnableMouse(true);
-						self.Frame:RegisterForClicks("LeftButton");		
+						self.Frame:RegisterForClicks("LeftButtonDown");		
 						self.Frame:Show();
 					end;
 		
@@ -731,7 +709,7 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 						self.Frame:SetWidth(120);
 				    	    	self.Frame:SetHeight(20);
 
-						self.text[1] = self.Frame:CreateFontString("settings","BUTTON")
+						self.text[1] = self.Frame:CreateFontString("settings",nil)
 						self.text[1]:SetFont(GameFontNormal:GetFont(),12);
 						self.text[1]:SetText('|cffffffffLanguage|r')
 						self.text[1]:SetPoint("LEFT", self.Frame, "LEFT", -82, 0 );
@@ -790,7 +768,7 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 						self.Frame:SetText("Set");
 	
 						self.Frame:EnableMouse(true);
-						self.Frame:RegisterForClicks("LeftButton");		
+						self.Frame:RegisterForClicks("LeftButtonDown");		
 						self.Frame:Show();
 					end;
 
@@ -826,7 +804,7 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 						 --UIDropDownMenu_SetSelectedValue(Tongues.UI.MainMenu.Speak.DialectDropDown.Frame,val)
 						--end]]
 						
-						Lib_UIDropDownMenu_Initialize(Tongues.UI.MainMenu.Speak.LanguageDropDown.Frame, Tongues.UpdateLanguageDropDown);	
+---EDDM.UIDropDownMenu_Initialize(Tongues.UI.MainMenu.Speak.LanguageDropDown.dropdownFrame, Tongues.UpdateLanguageDropDown);	
 					end;
 
 					OnMouseDown = function(self)
@@ -849,7 +827,7 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 						self.Frame:SetText("Clear");
 	
 						self.Frame:EnableMouse(true);
-						self.Frame:RegisterForClicks("LeftButton");		
+						self.Frame:RegisterForClicks("LeftButtonDown");		
 						self.Frame:Show();
 					end;
 	
@@ -883,7 +861,7 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 						self.Frame:SetText("List");
 
 						self.Frame:EnableMouse(true);
-						self.Frame:RegisterForClicks("LeftButton");		
+						self.Frame:RegisterForClicks("LeftButtonDown");		
 						self.Frame:Show();
 					end;
 	
@@ -903,6 +881,7 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 		 
 			--=======================================================================================================
 			--Hear
+			
 			Hear = {
 				Frame;
 				texture  = {};
@@ -928,20 +907,11 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 				---------------------------------------------------------------------------------------------
 				Filter = {
 					Frame;
-					texture  = {};
-					text	 = {};
-			
+					
+					dropdownFrame = EDDM.UIDropDownMenu_GetOrCreate("AffectDD");					
 					Configure = function(self)
-						self.Frame = CreateFrame("Button", "HearFilterTextbox", Tongues.UI.MainMenu.Hear.Frame,"Lib_UIDropDownMenuTemplate"); 
-						self.Frame:SetPoint("LEFT",Tongues.UI.MainMenu.Hear.Frame, "TOPLEFT", 55, -20);
-						self.text[1] = self.Frame:CreateFontString("settings","BUTTON")
-						self.text[1]:SetFont(GameFontNormal:GetFont(),12);
-						self.text[1]:SetText('|cffffffffFilter|r')
-						self.text[1]:SetPoint("LEFT", self.Frame, "LEFT", -55, 0 );
-
-						Lib_UIDropDownMenu_Initialize(self.Frame, self.Initialize);		
-						self.Frame:Show();
-					end;
+						EDDM.UIDropDownMenu_Initialize(self.dropdownFrame, self.Initialize, "MENU")
+						end;
 
 					Initialize = function()
 						local info            = {};
@@ -951,14 +921,15 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 							info.value      = k;
 							info.checked = nil; 
 							info.func       = Tongues.UI.MainMenu.Hear.Filter.OnClick;
-							Lib_UIDropDownMenu_AddButton(info);
+							EDDM.UIDropDownMenu_AddButton(info);
 						end;		
 					end;
 				
 					OnClick = function(self)
-						Lib_UIDropDownMenu_ClearAll(Tongues.UI.MainMenu.Hear.Filter.Frame);
-						Lib_UIDropDownMenu_SetSelectedValue(Tongues.UI.MainMenu.Hear.Filter.Frame, self.value); 
+						EDDM.UIDropDownMenu_ClearAll(Tongues.UI.MainMenu.Hear.Filter.dropdownFrame);
+						EDDM.UIDropDownMenu_SetSelectedValue(Tongues.UI.MainMenu.Hear.Filter.dropdownFrame, self.value); 
 						Tongues.Settings.Character.Filter = self.value;
+						EDDM.ToggleDropDownMenu(1, nil, self.dropdownFrame, "cursor", 3, -3)
 					end;
 				};
 			};
@@ -981,12 +952,12 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 					self.Frame:SetWidth(70)
 			    	    	self.Frame:SetHeight(70)
 					self.Frame:SetPoint("TOPLEFT", Tongues.UI.MainMenu.Frame, -2,0);
-					self.texture[1] = self.Frame:CreateTexture("settings","BUTTON")
+					self.texture[1] = self.Frame:CreateTexture("settings",nil)
 					self.texture[1]:SetTexture("Interface\\Icons\\Spell_Shadow_SoulLeech")
 					self.texture[1]:SetAllPoints();
 					self.Frame:EnableMouse(true);
-					self.Frame:RegisterForClicks("LeftButton");
-					self.Frame:RegisterForDrag("LeftButton");		
+					self.Frame:RegisterForClicks("LeftButtonDown");
+					self.Frame:RegisterForDrag("LeftButtonDown");		
 					self.Frame:Show();
 				end;
 
@@ -1030,7 +1001,7 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 					--self.texture[1]:SetTexture("Interface\\Buttons\\UI-Panel-MinimizeButton-Up")
 					--self.texture[1]:SetPoint("CENTER", self.Frame, "CENTER", 0, 0);
 					self.Frame:EnableMouse(true);
-					self.Frame:RegisterForClicks("LeftButton");		
+					self.Frame:RegisterForClicks("LeftButtonDown");		
 					self.Frame:Show();
 				end;
 
@@ -1070,7 +1041,7 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 					self.Frame:SetText("Advanced Options");
 
 					self.Frame:EnableMouse(true);
-					self.Frame:RegisterForClicks("LeftButton");		
+					self.Frame:RegisterForClicks("LeftButtonDown");		
 					self.Frame:Show();
 				end;
 
@@ -1102,31 +1073,31 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 					self.Frame:SetHeight(240)
 			    	    	self.Frame:SetPoint("TOP", Tongues.UI.MainMenu.Frame, "BOTTOM", 0, 0);
 			
-					self.text[1] = self.Frame:CreateFontString("settings","BUTTON")
+					self.text[1] = self.Frame:CreateFontString("settings",nil)
 					self.text[1]:SetFont(GameFontNormal:GetFont(),18);
 					self.text[1]:SetText('|cffffffffTranslations|r')
 					self.text[1]:SetPoint("LEFT", self.Frame, "TOPLEFT",20,  -10);
 
-					self.text[2] = self.Frame:CreateFontString("settings","BUTTON")
+					self.text[2] = self.Frame:CreateFontString("settings",nil)
 					self.text[2]:SetFont(GameFontNormal:GetFont(),18);
 					self.text[2]:SetText('|cffffffffScreen|r')
 					self.text[2]:SetPoint("LEFT", self.Frame, "TOPLEFT",150,  -10);
 
-					self.texture[4] = self.Frame:CreateTexture("settings","BORDER")
+					self.texture[4] = self.Frame:CreateTexture("settings",nil)
 					self.texture[4]:SetTexture("Interface\\PaperDollInfoFrame\\UI-Character-General-BottomLeft")
 					self.texture[4]:SetTexCoord(0, 1, 0, 0.75)
 					self.texture[4]:SetPoint("BOTTOMLEFT", self.Frame, "TOPLEFT", -4, -250);
 					
 
-					self.texture[5] = self.Frame:CreateTexture("settings","BORDER")
+					self.texture[5] = self.Frame:CreateTexture("settings",nil)
 					self.texture[5]:SetTexture("Interface\\PaperDollInfoFrame\\UI-Character-General-BottomRight")
 					self.texture[5]:SetTexCoord(0, 1, 0, 0.75)
 					self.texture[5]:SetPoint("BOTTOMRIGHT", self.Frame, "TOPRIGHT", 32, -250);
 
-					--self.texture[6] = self.Frame:CreateTexture("settings","BORDER")
+					--self.texture[6] = self.Frame:CreateTexture("settings",nil)
 					--self.texture[6]:SetTexture("Interface\\PaperDollInfoFrame\\UI-Character-General-BottomLeft")
 					--self.texture[6]:SetPoint("BOTTOMLEFT", self.Frame, "BOTTOMLEFT", -4, -290);
-					--self.texture[7] = self.Frame:CreateTexture("settings","BORDER")
+					--self.texture[7] = self.Frame:CreateTexture("settings",nil)
 					--self.texture[7]:SetTexture("Interface\\PaperDollInfoFrame\\UI-Character-General-BottomRight")
 					--self.texture[7]:SetPoint("BOTTOMRIGHT", self.Frame, "BOTTOMRIGHT", 32, -290);
 
@@ -1137,7 +1108,7 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 					
 
 					self.Frame:EnableMouse(true);
-					self.Frame:RegisterForDrag("LeftButton");
+					self.Frame:RegisterForDrag("LeftButtonDown");
 
 					self.Frame:Hide();
 				end;
@@ -1170,12 +1141,12 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 					text	 = {};
 	
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","TranslationsSelf", Tongues.UI.MainMenu.AdvancedOptions.Frame,"OptionsCheckButtonTemplate");
+						self.Frame = CreateFrame("CheckButton","TranslationsSelf", Tongues.UI.MainMenu.AdvancedOptions.Frame);
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
 	
-						self.text[1] = self.Frame:CreateFontString("settings","BUTTON")
+						self.text[1] = self.Frame:CreateFontString("settings",nil)
 						self.text[1]:SetFont(GameFontNormal:GetFont(),12);
 						self.text[1]:SetText('|cffffffffSelf|r')
 						self.text[1]:SetPoint("LEFT", self.Frame, "LEFT",25, 0 );
@@ -1186,7 +1157,7 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 						self.Frame:SetText("CheckBox Thing");
 	
 						self.Frame:EnableMouse(true);
-						self.Frame:RegisterForClicks("LeftButton");		
+						self.Frame:RegisterForClicks("LeftButtonDown");		
 						self.Frame:Show();
 					end;
 	
@@ -1210,12 +1181,12 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 					text	 = {};
 	
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","TranslationsTargetted", Tongues.UI.MainMenu.AdvancedOptions.Frame,"OptionsCheckButtonTemplate");
+						self.Frame = CreateFrame("CheckButton","TranslationsTargetted", Tongues.UI.MainMenu.AdvancedOptions.Frame);
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
 	
-						self.text[1] = self.Frame:CreateFontString("settings","BUTTON")
+						self.text[1] = self.Frame:CreateFontString("settings",nil)
 						self.text[1]:SetFont(GameFontNormal:GetFont(),12);
 						self.text[1]:SetText('|cffffffffTo Targetted|r')
 						self.text[1]:SetPoint("LEFT", self.Frame, "LEFT",25, 0 );
@@ -1226,7 +1197,7 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 						self.Frame:SetText("CheckBox Thing");
 	
 						self.Frame:EnableMouse(true);
-						self.Frame:RegisterForClicks("LeftButton");		
+						self.Frame:RegisterForClicks("LeftButtonDown");		
 						self.Frame:Show();
 					end;
 	
@@ -1250,12 +1221,12 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 					text	 = {};
 	
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","TranslationsParty", Tongues.UI.MainMenu.AdvancedOptions.Frame,"OptionsCheckButtonTemplate");
+						self.Frame = CreateFrame("CheckButton","TranslationsParty", Tongues.UI.MainMenu.AdvancedOptions.Frame);
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
 	
-						self.text[1] = self.Frame:CreateFontString("settings","BUTTON")
+						self.text[1] = self.Frame:CreateFontString("settings",nil)
 						self.text[1]:SetFont(GameFontNormal:GetFont(),12);
 						self.text[1]:SetText('|cffffffffParty|r')
 						self.text[1]:SetPoint("LEFT", self.Frame, "LEFT",25, 0 );
@@ -1266,7 +1237,7 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 						self.Frame:SetText("CheckBox Thing");
 	
 						self.Frame:EnableMouse(true);
-						self.Frame:RegisterForClicks("LeftButton");		
+						self.Frame:RegisterForClicks("LeftButtonDown");		
 						self.Frame:Show();
 					end;
 	
@@ -1290,12 +1261,12 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 					text	 = {};
 	
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","TranslationsGuild", Tongues.UI.MainMenu.AdvancedOptions.Frame,"OptionsCheckButtonTemplate");
+						self.Frame = CreateFrame("CheckButton","TranslationsGuild", Tongues.UI.MainMenu.AdvancedOptions.Frame);
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
 	
-						self.text[1] = self.Frame:CreateFontString("settings","BUTTON")
+						self.text[1] = self.Frame:CreateFontString("settings",nil)
 						self.text[1]:SetFont(GameFontNormal:GetFont(),12);
 						self.text[1]:SetText('|cffffffffGuild|r')
 						self.text[1]:SetPoint("LEFT", self.Frame, "LEFT",25, 0 );
@@ -1306,7 +1277,7 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 						self.Frame:SetText("CheckBox Thing");
 	
 						self.Frame:EnableMouse(true);
-						self.Frame:RegisterForClicks("LeftButton");		
+						self.Frame:RegisterForClicks("LeftButtonDown");		
 						self.Frame:Show();
 					end;
 	
@@ -1330,12 +1301,12 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 					text	 = {};
 	
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","TranslationsOfficer", Tongues.UI.MainMenu.AdvancedOptions.Frame,"OptionsCheckButtonTemplate");
+						self.Frame = CreateFrame("CheckButton","TranslationsOfficer", Tongues.UI.MainMenu.AdvancedOptions.Frame);
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
 	
-						self.text[1] = self.Frame:CreateFontString("settings","BUTTON")
+						self.text[1] = self.Frame:CreateFontString("settings",nil)
 						self.text[1]:SetFont(GameFontNormal:GetFont(),12);
 						self.text[1]:SetText('|cffffffffOfficer|r')
 						self.text[1]:SetPoint("LEFT", self.Frame, "LEFT",25, 0 );
@@ -1346,7 +1317,7 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 						self.Frame:SetText("CheckBox Thing");
 	
 						self.Frame:EnableMouse(true);
-						self.Frame:RegisterForClicks("LeftButton");		
+						self.Frame:RegisterForClicks("LeftButtonDown");		
 						self.Frame:Show();
 					end;
 	
@@ -1370,12 +1341,12 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 					text	 = {};
 	
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","TranslationsRaidButton", Tongues.UI.MainMenu.AdvancedOptions.Frame,"OptionsCheckButtonTemplate");
+						self.Frame = CreateFrame("CheckButton","TranslationsRaidButton", Tongues.UI.MainMenu.AdvancedOptions.Frame);
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
 	
-						self.text[1] = self.Frame:CreateFontString("settings","BUTTON")
+						self.text[1] = self.Frame:CreateFontString("settings",nil)
 						self.text[1]:SetFont(GameFontNormal:GetFont(),12);
 						self.text[1]:SetText('|cffffffffRaid|r')
 						self.text[1]:SetPoint("LEFT", self.Frame, "LEFT",25, 0 );
@@ -1386,7 +1357,7 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 						self.Frame:SetText("CheckBox Thing");
 	
 						self.Frame:EnableMouse(true);
-						self.Frame:RegisterForClicks("LeftButton");		
+						self.Frame:RegisterForClicks("LeftButtonDown");		
 						self.Frame:Show();
 					end;
 	
@@ -1410,12 +1381,12 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 					text	 = {};
 	
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","TranslationsRaidAlert", Tongues.UI.MainMenu.AdvancedOptions.Frame,"OptionsCheckButtonTemplate");
+						self.Frame = CreateFrame("CheckButton","TranslationsRaidAlert", Tongues.UI.MainMenu.AdvancedOptions.Frame);
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
 	
-						self.text[1] = self.Frame:CreateFontString("settings","BUTTON")
+						self.text[1] = self.Frame:CreateFontString("settings",nil)
 						self.text[1]:SetFont(GameFontNormal:GetFont(),12);
 						self.text[1]:SetText('|cffffffffRaid Alert|r')
 						self.text[1]:SetPoint("LEFT", self.Frame, "LEFT",25, 0 );
@@ -1426,7 +1397,7 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 						self.Frame:SetText("CheckBox Thing");
 	
 						self.Frame:EnableMouse(true);
-						self.Frame:RegisterForClicks("LeftButton");		
+						self.Frame:RegisterForClicks("LeftButtonDown");		
 						self.Frame:Show();
 					end;
 	
@@ -1450,12 +1421,12 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 					text	 = {};
 	
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","TranslationsBattleground", Tongues.UI.MainMenu.AdvancedOptions.Frame,"OptionsCheckButtonTemplate");
+						self.Frame = CreateFrame("CheckButton","TranslationsBattleground", Tongues.UI.MainMenu.AdvancedOptions.Frame);
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
 	
-						self.text[1] = self.Frame:CreateFontString("settings","BUTTON")
+						self.text[1] = self.Frame:CreateFontString("settings",nil)
 						self.text[1]:SetFont(GameFontNormal:GetFont(),12);
 						self.text[1]:SetText('|cffffffffBattleground|r')
 						self.text[1]:SetPoint("LEFT", self.Frame, "LEFT",25, 0 );
@@ -1466,7 +1437,7 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 						self.Frame:SetText("CheckBox Thing");
 	
 						self.Frame:EnableMouse(true);
-						self.Frame:RegisterForClicks("LeftButton");		
+						self.Frame:RegisterForClicks("LeftButtonDown");		
 						self.Frame:Show();
 					end;
 	
@@ -1522,7 +1493,7 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 				    	    	self.Frame:SetHeight(25)
 	
 						self.Frame:SetPoint("LEFT",Tongues.UI.MainMenu.AdvancedOptions.Frame, "TOPLEFT", 100, -200);
-						self.text[1] = self.Frame:CreateFontString("settings","BUTTON")
+						self.text[1] = self.Frame:CreateFontString("settings",nil)
 						self.text[1]:SetFont(GameFontNormal:GetFont(),12);
 						self.text[1]:SetText('|cffffffffTranslator|r')
 						self.text[1]:SetPoint("LEFT", self.Frame, "LEFT", -80, 0 ); 
@@ -1560,7 +1531,7 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 						self.Frame:SetText("+/-");
 	
 						self.Frame:EnableMouse(true);
-						self.Frame:RegisterForClicks("LeftButton");		
+						self.Frame:RegisterForClicks("LeftButtonDown");		
 						self.Frame:Show();
 					end;
 	
@@ -1596,7 +1567,7 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 						self.Frame:SetText("Clear");
 	
 						self.Frame:EnableMouse(true);
-						self.Frame:RegisterForClicks("LeftButton");		
+						self.Frame:RegisterForClicks("LeftButtonDown");		
 						self.Frame:Show();
 					end;
 	
@@ -1624,7 +1595,7 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 						self.Frame:SetText("List");
 	
 						self.Frame:EnableMouse(true);
-						self.Frame:RegisterForClicks("LeftButton");		
+						self.Frame:RegisterForClicks("LeftButtonDown");		
 						self.Frame:Show();
 					end;
 	
@@ -1661,12 +1632,12 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 					text	 = {};
 	
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","ScreenSelf", Tongues.UI.MainMenu.AdvancedOptions.Frame,"OptionsCheckButtonTemplate");
+						self.Frame = CreateFrame("CheckButton","ScreenSelf", Tongues.UI.MainMenu.AdvancedOptions.Frame);
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
 	
-						self.text[1] = self.Frame:CreateFontString("settings","BUTTON")
+						self.text[1] = self.Frame:CreateFontString("settings",nil)
 						self.text[1]:SetFont(GameFontNormal:GetFont(),12);
 						self.text[1]:SetText('|cffffffffSelf|r')
 						self.text[1]:SetPoint("LEFT", self.Frame, "LEFT",25, 0 );
@@ -1677,7 +1648,7 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 						self.Frame:SetText("CheckBox Thing");
 	
 						self.Frame:EnableMouse(true);
-						self.Frame:RegisterForClicks("LeftButton");		
+						self.Frame:RegisterForClicks("LeftButtonDown");		
 						self.Frame:Show();
 					end;
 	
@@ -1701,12 +1672,12 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 					text	 = {};
 	
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","ScreenTargetted", Tongues.UI.MainMenu.AdvancedOptions.Frame,"OptionsCheckButtonTemplate");
+						self.Frame = CreateFrame("CheckButton","ScreenTargetted", Tongues.UI.MainMenu.AdvancedOptions.Frame);
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
 	
-						self.text[1] = self.Frame:CreateFontString("settings","BUTTON")
+						self.text[1] = self.Frame:CreateFontString("settings",nil)
 						self.text[1]:SetFont(GameFontNormal:GetFont(),12);
 						self.text[1]:SetText('|cffffffffTo Targetted|r')
 						self.text[1]:SetPoint("LEFT", self.Frame, "LEFT",25, 0 );
@@ -1717,7 +1688,7 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 						self.Frame:SetText("CheckBox Thing");
 	
 						self.Frame:EnableMouse(true);
-						self.Frame:RegisterForClicks("LeftButton");		
+						self.Frame:RegisterForClicks("LeftButtonDown");		
 						self.Frame:Show();
 					end;
 	
@@ -1741,12 +1712,12 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 					text	 = {};
 	
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","ScreenParty", Tongues.UI.MainMenu.AdvancedOptions.Frame,"OptionsCheckButtonTemplate");
+						self.Frame = CreateFrame("CheckButton","ScreenParty", Tongues.UI.MainMenu.AdvancedOptions.Frame);
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
 	
-						self.text[1] = self.Frame:CreateFontString("settings","BUTTON")
+						self.text[1] = self.Frame:CreateFontString("settings",nil)
 						self.text[1]:SetFont(GameFontNormal:GetFont(),12);
 						self.text[1]:SetText('|cffffffffParty|r')
 						self.text[1]:SetPoint("LEFT", self.Frame, "LEFT",25, 0 );
@@ -1757,7 +1728,7 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 						self.Frame:SetText("CheckBox Thing");
 	
 						self.Frame:EnableMouse(true);
-						self.Frame:RegisterForClicks("LeftButton");		
+						self.Frame:RegisterForClicks("LeftButtonDown");		
 						self.Frame:Show();
 					end;
 	
@@ -1781,12 +1752,12 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 					text	 = {};
 	
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","ScreenGuild", Tongues.UI.MainMenu.AdvancedOptions.Frame,"OptionsCheckButtonTemplate");
+						self.Frame = CreateFrame("CheckButton","ScreenGuild", Tongues.UI.MainMenu.AdvancedOptions.Frame);
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
 	
-						self.text[1] = self.Frame:CreateFontString("settings","BUTTON")
+						self.text[1] = self.Frame:CreateFontString("settings",nil)
 						self.text[1]:SetFont(GameFontNormal:GetFont(),12);
 						self.text[1]:SetText('|cffffffffGuild|r')
 						self.text[1]:SetPoint("LEFT", self.Frame, "LEFT",25, 0 );
@@ -1797,7 +1768,7 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 						self.Frame:SetText("CheckBox Thing");
 	
 						self.Frame:EnableMouse(true);
-						self.Frame:RegisterForClicks("LeftButton");		
+						self.Frame:RegisterForClicks("LeftButtonDown");		
 						self.Frame:Show();
 					end;
 	
@@ -1821,12 +1792,12 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 					text	 = {};
 	
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","ScreenOfficer", Tongues.UI.MainMenu.AdvancedOptions.Frame,"OptionsCheckButtonTemplate");
+						self.Frame = CreateFrame("CheckButton","ScreenOfficer", Tongues.UI.MainMenu.AdvancedOptions.Frame);
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
 	
-						self.text[1] = self.Frame:CreateFontString("settings","BUTTON")
+						self.text[1] = self.Frame:CreateFontString("settings",nil)
 						self.text[1]:SetFont(GameFontNormal:GetFont(),12);
 						self.text[1]:SetText('|cffffffffOfficer|r')
 						self.text[1]:SetPoint("LEFT", self.Frame, "LEFT",25, 0 );
@@ -1837,7 +1808,7 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 						self.Frame:SetText("CheckBox Thing");
 	
 						self.Frame:EnableMouse(true);
-						self.Frame:RegisterForClicks("LeftButton");		
+						self.Frame:RegisterForClicks("LeftButtonDown");		
 						self.Frame:Show();
 					end;
 	
@@ -1861,12 +1832,12 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 					text	 = {};
 	
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","ScreenRaidButton", Tongues.UI.MainMenu.AdvancedOptions.Frame,"OptionsCheckButtonTemplate");
+						self.Frame = CreateFrame("CheckButton","ScreenRaidButton", Tongues.UI.MainMenu.AdvancedOptions.Frame);
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
 	
-						self.text[1] = self.Frame:CreateFontString("settings","BUTTON")
+						self.text[1] = self.Frame:CreateFontString("settings",nil)
 						self.text[1]:SetFont(GameFontNormal:GetFont(),12);
 						self.text[1]:SetText('|cffffffffRaid|r')
 						self.text[1]:SetPoint("LEFT", self.Frame, "LEFT",25, 0 );
@@ -1877,7 +1848,7 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 						self.Frame:SetText("CheckBox Thing");
 	
 						self.Frame:EnableMouse(true);
-						self.Frame:RegisterForClicks("LeftButton");		
+						self.Frame:RegisterForClicks("LeftButtonDown");		
 						self.Frame:Show();
 					end;
 	
@@ -1901,12 +1872,12 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 					text	 = {};
 	
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","ScreenRaidAlert", Tongues.UI.MainMenu.AdvancedOptions.Frame,"OptionsCheckButtonTemplate");
+						self.Frame = CreateFrame("CheckButton","ScreenRaidAlert", Tongues.UI.MainMenu.AdvancedOptions.Frame);
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
 	
-						self.text[1] = self.Frame:CreateFontString("settings","BUTTON")
+						self.text[1] = self.Frame:CreateFontString("settings",nil)
 						self.text[1]:SetFont(GameFontNormal:GetFont(),12);
 						self.text[1]:SetText('|cffffffffRaid Alert|r')
 						self.text[1]:SetPoint("LEFT", self.Frame, "LEFT",25, 0 );
@@ -1917,7 +1888,7 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 						self.Frame:SetText("CheckBox Thing");
 	
 						self.Frame:EnableMouse(true);
-						self.Frame:RegisterForClicks("LeftButton");		
+						self.Frame:RegisterForClicks("LeftButtonDown");		
 						self.Frame:Show();
 					end;
 	
@@ -1941,12 +1912,12 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 					text	 = {};
 	
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","ScreenBattleground", Tongues.UI.MainMenu.AdvancedOptions.Frame,"OptionsCheckButtonTemplate");
+						self.Frame = CreateFrame("CheckButton","ScreenBattleground", Tongues.UI.MainMenu.AdvancedOptions.Frame);
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
 	
-						self.text[1] = self.Frame:CreateFontString("settings","BUTTON")
+						self.text[1] = self.Frame:CreateFontString("settings",nil)
 						self.text[1]:SetFont(GameFontNormal:GetFont(),12);
 						self.text[1]:SetText('|cffffffffBattleground|r')
 						self.text[1]:SetPoint("LEFT", self.Frame, "LEFT",25, 0 );
@@ -1957,7 +1928,7 @@ Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Spea
 						self.Frame:SetText("CheckBox Thing");
 	
 						self.Frame:EnableMouse(true);
-						self.Frame:RegisterForClicks("LeftButton");		
+						self.Frame:RegisterForClicks("LeftButtonDown");		
 						self.Frame:Show();
 					end;
 	
