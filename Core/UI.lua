@@ -90,7 +90,7 @@ end;
 				self.Frame = CreateFrame("Button","TonguesMiniMenu",UIParent, "UIPanelButtonTemplate");
 				self.Frame:SetScript("OnDragStart", self.OnDragStart);
 				self.Frame:SetScript("OnDragStop", self.OnDragStop);
-				self.Frame:SetScript("OnMouseUp", self.OnMouseUp);
+				self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 				self.Frame:SetFrameStrata("MEDIUM")
 				self.Frame:SetMovable(true)
 				self.Frame:SetWidth(100)
@@ -106,7 +106,7 @@ end;
 				self.Frame:Show();
 			end;
 
-			OnMouseUp = function(self,button)
+			OnMouseDown = function(self,button)
 				if button == "RightButton" then
 				  if IsAltKeyDown() then
 					Tongues:UpdateDialectContext2();
