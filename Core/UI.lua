@@ -988,7 +988,7 @@ end;
 					self.Frame:SetFrameStrata("DIALOG")
 					--self.Frame:SetWidth(10)
 			    	    	--self.Frame:SetHeight(10)
-					self.Frame:SetPoint("TOPRIGHT", Tongues.UI.MainMenu.Frame, 2,-9);
+					self.Frame:SetPoint("TOPRIGHT", Tongues.UI.MainMenu.Frame, 0,-12);
 					--self.texture[1] = self.Frame:CreateTexture("settings","BUTTON")
 					--self.texture[1]:SetTexture("Interface\\Buttons\\UI-Panel-MinimizeButton-Up")
 					--self.texture[1]:SetPoint("CENTER", self.Frame, "CENTER", 0, 0);
