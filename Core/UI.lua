@@ -108,12 +108,14 @@ end;
 
 			OnMouseDown = function(self,button)
 				if button == "RightButton" then
-				  if IsAltKeyDown() then
-					Tongues:UpdateDialectContext2();
-					Tongues.MenuClass:Show();
-				  else
-					Tongues.UI.MainMenu.Frame:Show();
-				 end
+					if Tongues.UI.MainMenu.Frame:IsVisible() == true then
+						Tongues.UI.MainMenu.Frame:Hide();
+					elseif IsAltKeyDown() then
+						Tongues:UpdateDialectContext2();
+						Tongues.MenuClass:Show();
+					else
+						Tongues.UI.MainMenu.Frame:Show();
+					end
 				else
 				   --if countLangauge() ~= 0 then
 					Tongues:CycleLanguage();
