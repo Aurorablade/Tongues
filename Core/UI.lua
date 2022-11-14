@@ -109,10 +109,9 @@ end;
 			OnMouseUp = function(self,button)
 				if button == "RightButton" then
 				  if IsAltKeyDown() then
-				  Tongues:UpdateDialectContext2();
-	              Tongues.MenuClass:Show();
+					Tongues:UpdateDialectContext2();
+					Tongues.MenuClass:Show();
 				  else
-					self:Hide();
 					Tongues.UI.MainMenu.Frame:Show();
 				 end
 				else
