@@ -100,7 +100,7 @@ end;
 				--self.texture[1]:SetTexture("Interface\\Icons\\Spell_Shadow_SoulLeech")
 				--self.texture[1]:SetAllPoints();
 				self.Frame:EnableMouse(true);
-				self.Frame:RegisterForDrag("LeftButtonDown");
+				self.Frame:RegisterForDrag("LeftButton");
 				self.Frame:RegisterForClicks("RightButtonDown");
 				
 				self.Frame:Show();
@@ -171,7 +171,7 @@ end;
 
 				self.Frame:EnableMouse(true);
 				--self.Frame:EnableKeyboard(true);
-				self.Frame:RegisterForDrag("LeftButtonDown");
+				self.Frame:RegisterForDrag("LeftButton");
 
 				self.Minimize:Configure();
 				self.CloseButton:Configure();
@@ -957,7 +957,7 @@ end;
 					self.texture[1]:SetAllPoints();
 					self.Frame:EnableMouse(true);
 					self.Frame:RegisterForClicks("LeftButtonDown");
-					self.Frame:RegisterForDrag("LeftButtonDown");		
+					self.Frame:RegisterForDrag("LeftButton");		
 					self.Frame:Show();
 				end;
 
@@ -1108,7 +1108,7 @@ end;
 					
 
 					self.Frame:EnableMouse(true);
-					self.Frame:RegisterForDrag("LeftButtonDown");
+					self.Frame:RegisterForDrag("LeftButton");
 
 					self.Frame:Hide();
 				end;
