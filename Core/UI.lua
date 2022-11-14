@@ -141,6 +141,7 @@ end;
 				self.Frame:SetScript("OnKeyDown", self.OnKeyDown);
 				self.Frame:SetScript("OnDragStart", self.OnDragStart);
 				self.Frame:SetScript("OnDragStop", self.OnDragStop);
+				self.Frame:SetScript("OnShow", self.OnShow);
 				self.Frame:SetFrameStrata("DIALOG")
 				self.Frame:SetMovable(true)
 				self.Frame:SetWidth(348)
@@ -193,6 +194,13 @@ end;
 				self.AdvancedOptions:Configure();
 				
 				self.Frame:Hide();
+			end;
+
+			OnShow = function (self)
+				-- Necessary to stop CloseButton from being stuck in PUSHED state
+				if (Tongues.UI.MainMenu.CloseButton.Frame:GetButtonState() == "PUSHED") then
+					Tongues.UI.MainMenu.CloseButton.Frame:SetButtonState("NORMAL");
+				end
 			end;
 
 			OnKeyDown = function (self,button)
