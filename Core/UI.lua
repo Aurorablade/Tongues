@@ -139,7 +139,7 @@ end;
 
 			Configure = function(self)
 				self.Frame = CreateFrame("Frame","TonguesMainMenu",UIParent);
-				self.Frame:SetScript("OnKeyUp", self.OnKeyDown);
+				self.Frame:SetScript("OnKeyDown", self.OnKeyDown);
 				self.Frame:SetScript("OnDragStart", self.OnDragStart);
 				self.Frame:SetScript("OnDragStop", self.OnDragStop);
 				self.Frame:SetFrameStrata("DIALOG")
@@ -198,9 +198,11 @@ end;
 
 			OnKeyDown = function (self,button)
 				if button == "ESCAPE" then
-					self:Hide()
-					Tongues.UI.MiniMenu.Frame:Show()
-				end;
+					self:SetPropagateKeyboardInput(false);
+					self:Hide();
+				else
+					self:SetPropagateKeyboardInput(true);
+				end
 			end;
 
 			OnDragStart = function (self)
