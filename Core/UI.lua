@@ -1039,7 +1039,7 @@ end;
 				end;
 
 				OnMouseUp = function(self)
-					if Tongues.UI.MainMenu.AdvancedOptions.Frame:IsVisible() == 1 then
+					if Tongues.UI.MainMenu.AdvancedOptions.Frame:IsVisible() == true then
 						Tongues.UI.MainMenu.AdvancedOptions.Frame:Hide()
 					else
 						Tongues.UI.MainMenu.AdvancedOptions.Frame:Show()
