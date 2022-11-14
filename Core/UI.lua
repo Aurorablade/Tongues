@@ -474,8 +474,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Speak.DialectDrift.Frame:SetChecked(not Tongues.UI.MainMenu.Speak.DialectDrift.Frame:GetChecked());
-								
 						if (Tongues.UI.MainMenu.Speak.DialectDrift.Frame:GetChecked() == true) then
 							--Tongues.Settings.Character.Translations.Self = true;
 						else
@@ -513,8 +511,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Speak.LanguageLearn.Frame:SetChecked(not Tongues.UI.MainMenu.Speak.LanguageLearn.Frame:GetChecked());
-
 						if (Tongues.UI.MainMenu.Speak.LanguageLearn.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.LanguageLearning = true;
 						else
@@ -552,8 +548,6 @@ end;
 					end;
 		
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Speak.ShapeshiftLanguage.Frame:SetChecked(not Tongues.UI.MainMenu.Speak.ShapeshiftLanguage.Frame:GetChecked());
-								
 						if (Tongues.UI.MainMenu.Speak.ShapeshiftLanguage.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.ShapeshiftLanguage = true;
 							--print(Tongues.Settings.Character.ShapeshiftLanguage)
@@ -598,8 +592,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Speak.MiniHide.Frame:GetChecked());
-
 						if (Tongues.UI.MainMenu.Speak.MiniHide.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.MMH = true;
 							TonguesMiniMenu:Hide();
@@ -640,7 +632,6 @@ end;
 					end;
 		
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Speak.LoreCompatibility.Frame:SetChecked(not Tongues.UI.MainMenu.Speak.LoreCompatibility.Frame:GetChecked());
 						if Tongues.UI.MainMenu.Speak.LoreCompatibility.Frame:GetChecked() == true then
 							--RemoveChatWindowChannel(1, "xtensionxtooltip2")
 							JoinChannelByName("xtensionxtooltip2")
@@ -1162,8 +1153,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Translations.Self.Frame:SetChecked(not Tongues.UI.MainMenu.Translations.Self.Frame:GetChecked());
-							
 						if (Tongues.UI.MainMenu.Translations.Self.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.Translations.Self = true;
 						else
@@ -1202,8 +1191,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Translations.Targetted.Frame:SetChecked(not Tongues.UI.MainMenu.Translations.Targetted.Frame:GetChecked());
-							
 						if (Tongues.UI.MainMenu.Translations.Targetted.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.Translations.Targetted = true;
 						else
@@ -1242,8 +1229,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Translations.Party.Frame:SetChecked(not Tongues.UI.MainMenu.Translations.Party.Frame:GetChecked());
-
 						if (Tongues.UI.MainMenu.Translations.Party.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.Translations.Party = true;
 						else
@@ -1282,8 +1267,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Translations.Guild.Frame:SetChecked(not Tongues.UI.MainMenu.Translations.Guild.Frame:GetChecked());
-
 						if (Tongues.UI.MainMenu.Translations.Guild.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.Translations.Guild = true;
 						else
@@ -1322,8 +1305,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Translations.Officer.Frame:SetChecked(not Tongues.UI.MainMenu.Translations.Officer.Frame:GetChecked());
-
 						if (Tongues.UI.MainMenu.Translations.Officer.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.Translations.Officer = true;
 						else
@@ -1362,8 +1343,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Translations.Raid.Frame:SetChecked(not Tongues.UI.MainMenu.Translations.Raid.Frame:GetChecked());
-
 						if (Tongues.UI.MainMenu.Translations.Raid.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.Translations.Raid = true;
 						else
@@ -1402,8 +1381,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Translations.RaidAlert.Frame:SetChecked(not Tongues.UI.MainMenu.Translations.RaidAlert.Frame:GetChecked());
-
 						if (Tongues.UI.MainMenu.Translations.RaidAlert.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.Translations.RaidAlert = true;
 						else
@@ -1442,8 +1419,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Translations.Battleground.Frame:SetChecked(not Tongues.UI.MainMenu.Translations.Battleground.Frame:GetChecked());
-
 						if (Tongues.UI.MainMenu.Translations.Battleground.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.Translations.Battleground = true;
 						else
@@ -1653,8 +1628,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Screen.Self.Frame:SetChecked(not Tongues.UI.MainMenu.Screen.Self.Frame:GetChecked());
-
 						if (Tongues.UI.MainMenu.Screen.Self.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.Screen.Self = true;
 						else
@@ -1693,8 +1666,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Screen.Targetted.Frame:SetChecked(not Tongues.UI.MainMenu.Screen.Targetted.Frame:GetChecked());
-							
 						if (Tongues.UI.MainMenu.Screen.Targetted.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.Screen.Targetted = true;
 						else
@@ -1733,8 +1704,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Screen.Party.Frame:SetChecked(not Tongues.UI.MainMenu.Screen.Party.Frame:GetChecked());
-
 						if (Tongues.UI.MainMenu.Screen.Party.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.Screen.Party = true;
 						else
@@ -1773,8 +1742,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Screen.Guild.Frame:SetChecked(not Tongues.UI.MainMenu.Screen.Guild.Frame:GetChecked());
-
 						if (Tongues.UI.MainMenu.Screen.Guild.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.Screen.Guild = true;
 						else
@@ -1813,8 +1780,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Screen.Officer.Frame:SetChecked(not Tongues.UI.MainMenu.Screen.Officer.Frame:GetChecked());
-
 						if (Tongues.UI.MainMenu.Screen.Officer.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.Screen.Officer = true;
 						else
@@ -1853,8 +1818,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Screen.Raid.Frame:SetChecked(not Tongues.UI.MainMenu.Screen.Raid.Frame:GetChecked());
-
 						if (Tongues.UI.MainMenu.Screen.Raid.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.Screen.Raid = true;
 						else
@@ -1893,8 +1856,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Screen.RaidAlert.Frame:SetChecked(not Tongues.UI.MainMenu.Screen.RaidAlert.Frame:GetChecked());
-
 						if (Tongues.UI.MainMenu.Screen.RaidAlert.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.Screen.RaidAlert = true;
 						else
@@ -1933,8 +1894,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Screen.Battleground.Frame:SetChecked(not Tongues.UI.MainMenu.Screen.Battleground.Frame:GetChecked());
-
 						if (Tongues.UI.MainMenu.Screen.Battleground.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.Screen.Battleground = true;
 						else
