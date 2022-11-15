@@ -90,7 +90,7 @@ end;
 				self.Frame = CreateFrame("Button","TonguesMiniMenu",UIParent, "UIPanelButtonTemplate");
 				self.Frame:SetScript("OnDragStart", self.OnDragStart);
 				self.Frame:SetScript("OnDragStop", self.OnDragStop);
-				self.Frame:SetScript("OnMouseUp", self.OnMouseUp);
+				self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 				self.Frame:SetFrameStrata("MEDIUM")
 				self.Frame:SetMovable(true)
 				self.Frame:SetWidth(100)
@@ -106,15 +106,16 @@ end;
 				self.Frame:Show();
 			end;
 
-			OnMouseUp = function(self,button)
+			OnMouseDown = function(self,button)
 				if button == "RightButton" then
-				  if IsAltKeyDown() then
-				  Tongues:UpdateDialectContext2();
-	              Tongues.MenuClass:Show();
-				  else
-					self:Hide();
-					Tongues.UI.MainMenu.Frame:Show();
-				 end
+					if Tongues.UI.MainMenu.Frame:IsVisible() == true then
+						Tongues.UI.MainMenu.Frame:Hide();
+					elseif IsAltKeyDown() then
+						Tongues:UpdateDialectContext2();
+						Tongues.MenuClass:Show();
+					else
+						Tongues.UI.MainMenu.Frame:Show();
+					end
 				else
 				   --if countLangauge() ~= 0 then
 					Tongues:CycleLanguage();
@@ -139,9 +140,10 @@ end;
 
 			Configure = function(self)
 				self.Frame = CreateFrame("Frame","TonguesMainMenu",UIParent);
-				self.Frame:SetScript("OnKeyUp", self.OnKeyDown);
+				self.Frame:SetScript("OnKeyDown", self.OnKeyDown);
 				self.Frame:SetScript("OnDragStart", self.OnDragStart);
 				self.Frame:SetScript("OnDragStop", self.OnDragStop);
+				self.Frame:SetScript("OnShow", self.OnShow);
 				self.Frame:SetFrameStrata("DIALOG")
 				self.Frame:SetMovable(true)
 				self.Frame:SetWidth(348)
@@ -196,11 +198,20 @@ end;
 				self.Frame:Hide();
 			end;
 
+			OnShow = function (self)
+				-- Necessary to stop CloseButton from being stuck in PUSHED state
+				if (Tongues.UI.MainMenu.CloseButton.Frame:GetButtonState() == "PUSHED") then
+					Tongues.UI.MainMenu.CloseButton.Frame:SetButtonState("NORMAL");
+				end
+			end;
+
 			OnKeyDown = function (self,button)
 				if button == "ESCAPE" then
-					self:Hide()
-					Tongues.UI.MiniMenu.Frame:Show()
-				end;
+					self:SetPropagateKeyboardInput(false);
+					self:Hide();
+				else
+					self:SetPropagateKeyboardInput(true);
+				end
 			end;
 
 			OnDragStart = function (self)
@@ -454,7 +465,7 @@ end;
 					text	 = {};
 		
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","DialectDrift", Tongues.UI.MainMenu.Speak.Frame);
+						self.Frame = CreateFrame("CheckButton","DialectDrift", Tongues.UI.MainMenu.Speak.Frame, "UICheckButtonTemplate");
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
@@ -474,8 +485,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Speak.DialectDrift.Frame:SetChecked(not Tongues.UI.MainMenu.Speak.DialectDrift.Frame:GetChecked());
-								
 						if (Tongues.UI.MainMenu.Speak.DialectDrift.Frame:GetChecked() == true) then
 							--Tongues.Settings.Character.Translations.Self = true;
 						else
@@ -493,7 +502,7 @@ end;
 					text	 = {};
 		
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","LanguageLearn", Tongues.UI.MainMenu.Speak.Frame);
+						self.Frame = CreateFrame("CheckButton","LanguageLearn", Tongues.UI.MainMenu.Speak.Frame, "UICheckButtonTemplate");
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
@@ -513,8 +522,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Speak.LanguageLearn.Frame:SetChecked(not Tongues.UI.MainMenu.Speak.LanguageLearn.Frame:GetChecked());
-
 						if (Tongues.UI.MainMenu.Speak.LanguageLearn.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.LanguageLearning = true;
 						else
@@ -532,7 +539,7 @@ end;
 					text	 = {};
 		
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","ShapeShiftLanguage", Tongues.UI.MainMenu.Speak.Frame);
+						self.Frame = CreateFrame("CheckButton","ShapeShiftLanguage", Tongues.UI.MainMenu.Speak.Frame, "UICheckButtonTemplate");
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
@@ -552,8 +559,6 @@ end;
 					end;
 		
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Speak.ShapeshiftLanguage.Frame:SetChecked(not Tongues.UI.MainMenu.Speak.ShapeshiftLanguage.Frame:GetChecked());
-								
 						if (Tongues.UI.MainMenu.Speak.ShapeshiftLanguage.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.ShapeshiftLanguage = true;
 							--print(Tongues.Settings.Character.ShapeshiftLanguage)
@@ -577,14 +582,14 @@ end;
 					text	 = {};
 	
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","HideMiniF", Tongues.UI.MainMenu.Speak.Frame);
+						self.Frame = CreateFrame("CheckButton","HideMiniF", Tongues.UI.MainMenu.Speak.Frame, "UICheckButtonTemplate");
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
 	
 						self.text[1] = self.Frame:CreateFontString("settings",nil)
 						self.text[1]:SetFont(GameFontNormal:GetFont(),12);
-						self.text[1]:SetText('|cffffffffHide\nMiniMenu|r')
+						self.text[1]:SetText('|cffffffffHide MiniMenu|r')
 						self.text[1]:SetPoint("LEFT", self.Frame, "LEFT",25, 0 );
 	
 						self.Frame:SetWidth(25)
@@ -598,8 +603,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Speak.MiniHide.Frame:SetChecked(not Tongues.UI.MainMenu.Speak.MiniHide.Frame:GetChecked());
-
 						if (Tongues.UI.MainMenu.Speak.MiniHide.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.MMH = true;
 							TonguesMiniMenu:Hide();
@@ -620,7 +623,7 @@ end;
 					text	 = {};
 		
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","LoreCompatibility", Tongues.UI.MainMenu.Speak.Frame);
+						self.Frame = CreateFrame("CheckButton","LoreCompatibility", Tongues.UI.MainMenu.Speak.Frame, "UICheckButtonTemplate");
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
@@ -640,7 +643,6 @@ end;
 					end;
 		
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Speak.LoreCompatibility.Frame:SetChecked(not Tongues.UI.MainMenu.Speak.LoreCompatibility.Frame:GetChecked());
 						if Tongues.UI.MainMenu.Speak.LoreCompatibility.Frame:GetChecked() == true then
 							--RemoveChatWindowChannel(1, "xtensionxtooltip2")
 							JoinChannelByName("xtensionxtooltip2")
@@ -996,7 +998,7 @@ end;
 					self.Frame:SetFrameStrata("DIALOG")
 					--self.Frame:SetWidth(10)
 			    	    	--self.Frame:SetHeight(10)
-					self.Frame:SetPoint("TOPRIGHT", Tongues.UI.MainMenu.Frame, 2,-9);
+					self.Frame:SetPoint("TOPRIGHT", Tongues.UI.MainMenu.Frame, 0,-12);
 					--self.texture[1] = self.Frame:CreateTexture("settings","BUTTON")
 					--self.texture[1]:SetTexture("Interface\\Buttons\\UI-Panel-MinimizeButton-Up")
 					--self.texture[1]:SetPoint("CENTER", self.Frame, "CENTER", 0, 0);
@@ -1046,7 +1048,7 @@ end;
 				end;
 
 				OnMouseUp = function(self)
-					if Tongues.UI.MainMenu.AdvancedOptions.Frame:IsVisible() == 1 then
+					if Tongues.UI.MainMenu.AdvancedOptions.Frame:IsVisible() == true then
 						Tongues.UI.MainMenu.AdvancedOptions.Frame:Hide()
 					else
 						Tongues.UI.MainMenu.AdvancedOptions.Frame:Show()
@@ -1141,7 +1143,7 @@ end;
 					text	 = {};
 	
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","TranslationsSelf", Tongues.UI.MainMenu.AdvancedOptions.Frame);
+						self.Frame = CreateFrame("CheckButton","TranslationsSelf", Tongues.UI.MainMenu.AdvancedOptions.Frame, "UICheckButtonTemplate");
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
@@ -1162,8 +1164,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Translations.Self.Frame:SetChecked(not Tongues.UI.MainMenu.Translations.Self.Frame:GetChecked());
-							
 						if (Tongues.UI.MainMenu.Translations.Self.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.Translations.Self = true;
 						else
@@ -1181,7 +1181,7 @@ end;
 					text	 = {};
 	
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","TranslationsTargetted", Tongues.UI.MainMenu.AdvancedOptions.Frame);
+						self.Frame = CreateFrame("CheckButton","TranslationsTargetted", Tongues.UI.MainMenu.AdvancedOptions.Frame, "UICheckButtonTemplate");
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
@@ -1202,8 +1202,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Translations.Targetted.Frame:SetChecked(not Tongues.UI.MainMenu.Translations.Targetted.Frame:GetChecked());
-							
 						if (Tongues.UI.MainMenu.Translations.Targetted.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.Translations.Targetted = true;
 						else
@@ -1221,7 +1219,7 @@ end;
 					text	 = {};
 	
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","TranslationsParty", Tongues.UI.MainMenu.AdvancedOptions.Frame);
+						self.Frame = CreateFrame("CheckButton","TranslationsParty", Tongues.UI.MainMenu.AdvancedOptions.Frame, "UICheckButtonTemplate");
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
@@ -1242,8 +1240,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Translations.Party.Frame:SetChecked(not Tongues.UI.MainMenu.Translations.Party.Frame:GetChecked());
-
 						if (Tongues.UI.MainMenu.Translations.Party.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.Translations.Party = true;
 						else
@@ -1261,7 +1257,7 @@ end;
 					text	 = {};
 	
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","TranslationsGuild", Tongues.UI.MainMenu.AdvancedOptions.Frame);
+						self.Frame = CreateFrame("CheckButton","TranslationsGuild", Tongues.UI.MainMenu.AdvancedOptions.Frame, "UICheckButtonTemplate");
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
@@ -1282,8 +1278,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Translations.Guild.Frame:SetChecked(not Tongues.UI.MainMenu.Translations.Guild.Frame:GetChecked());
-
 						if (Tongues.UI.MainMenu.Translations.Guild.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.Translations.Guild = true;
 						else
@@ -1301,7 +1295,7 @@ end;
 					text	 = {};
 	
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","TranslationsOfficer", Tongues.UI.MainMenu.AdvancedOptions.Frame);
+						self.Frame = CreateFrame("CheckButton","TranslationsOfficer", Tongues.UI.MainMenu.AdvancedOptions.Frame, "UICheckButtonTemplate");
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
@@ -1322,8 +1316,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Translations.Officer.Frame:SetChecked(not Tongues.UI.MainMenu.Translations.Officer.Frame:GetChecked());
-
 						if (Tongues.UI.MainMenu.Translations.Officer.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.Translations.Officer = true;
 						else
@@ -1341,7 +1333,7 @@ end;
 					text	 = {};
 	
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","TranslationsRaidButton", Tongues.UI.MainMenu.AdvancedOptions.Frame);
+						self.Frame = CreateFrame("CheckButton","TranslationsRaidButton", Tongues.UI.MainMenu.AdvancedOptions.Frame, "UICheckButtonTemplate");
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
@@ -1362,8 +1354,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Translations.Raid.Frame:SetChecked(not Tongues.UI.MainMenu.Translations.Raid.Frame:GetChecked());
-
 						if (Tongues.UI.MainMenu.Translations.Raid.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.Translations.Raid = true;
 						else
@@ -1381,7 +1371,7 @@ end;
 					text	 = {};
 	
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","TranslationsRaidAlert", Tongues.UI.MainMenu.AdvancedOptions.Frame);
+						self.Frame = CreateFrame("CheckButton","TranslationsRaidAlert", Tongues.UI.MainMenu.AdvancedOptions.Frame, "UICheckButtonTemplate");
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
@@ -1402,8 +1392,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Translations.RaidAlert.Frame:SetChecked(not Tongues.UI.MainMenu.Translations.RaidAlert.Frame:GetChecked());
-
 						if (Tongues.UI.MainMenu.Translations.RaidAlert.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.Translations.RaidAlert = true;
 						else
@@ -1421,7 +1409,7 @@ end;
 					text	 = {};
 	
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","TranslationsBattleground", Tongues.UI.MainMenu.AdvancedOptions.Frame);
+						self.Frame = CreateFrame("CheckButton","TranslationsBattleground", Tongues.UI.MainMenu.AdvancedOptions.Frame, "UICheckButtonTemplate");
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
@@ -1442,8 +1430,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Translations.Battleground.Frame:SetChecked(not Tongues.UI.MainMenu.Translations.Battleground.Frame:GetChecked());
-
 						if (Tongues.UI.MainMenu.Translations.Battleground.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.Translations.Battleground = true;
 						else
@@ -1632,7 +1618,7 @@ end;
 					text	 = {};
 	
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","ScreenSelf", Tongues.UI.MainMenu.AdvancedOptions.Frame);
+						self.Frame = CreateFrame("CheckButton","ScreenSelf", Tongues.UI.MainMenu.AdvancedOptions.Frame, "UICheckButtonTemplate");
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
@@ -1653,8 +1639,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Screen.Self.Frame:SetChecked(not Tongues.UI.MainMenu.Screen.Self.Frame:GetChecked());
-
 						if (Tongues.UI.MainMenu.Screen.Self.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.Screen.Self = true;
 						else
@@ -1672,7 +1656,7 @@ end;
 					text	 = {};
 	
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","ScreenTargetted", Tongues.UI.MainMenu.AdvancedOptions.Frame);
+						self.Frame = CreateFrame("CheckButton","ScreenTargetted", Tongues.UI.MainMenu.AdvancedOptions.Frame, "UICheckButtonTemplate");
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
@@ -1693,8 +1677,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Screen.Targetted.Frame:SetChecked(not Tongues.UI.MainMenu.Screen.Targetted.Frame:GetChecked());
-							
 						if (Tongues.UI.MainMenu.Screen.Targetted.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.Screen.Targetted = true;
 						else
@@ -1712,7 +1694,7 @@ end;
 					text	 = {};
 	
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","ScreenParty", Tongues.UI.MainMenu.AdvancedOptions.Frame);
+						self.Frame = CreateFrame("CheckButton","ScreenParty", Tongues.UI.MainMenu.AdvancedOptions.Frame, "UICheckButtonTemplate");
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
@@ -1733,8 +1715,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Screen.Party.Frame:SetChecked(not Tongues.UI.MainMenu.Screen.Party.Frame:GetChecked());
-
 						if (Tongues.UI.MainMenu.Screen.Party.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.Screen.Party = true;
 						else
@@ -1752,7 +1732,7 @@ end;
 					text	 = {};
 	
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","ScreenGuild", Tongues.UI.MainMenu.AdvancedOptions.Frame);
+						self.Frame = CreateFrame("CheckButton","ScreenGuild", Tongues.UI.MainMenu.AdvancedOptions.Frame, "UICheckButtonTemplate");
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
@@ -1773,8 +1753,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Screen.Guild.Frame:SetChecked(not Tongues.UI.MainMenu.Screen.Guild.Frame:GetChecked());
-
 						if (Tongues.UI.MainMenu.Screen.Guild.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.Screen.Guild = true;
 						else
@@ -1792,7 +1770,7 @@ end;
 					text	 = {};
 	
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","ScreenOfficer", Tongues.UI.MainMenu.AdvancedOptions.Frame);
+						self.Frame = CreateFrame("CheckButton","ScreenOfficer", Tongues.UI.MainMenu.AdvancedOptions.Frame, "UICheckButtonTemplate");
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
@@ -1813,8 +1791,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Screen.Officer.Frame:SetChecked(not Tongues.UI.MainMenu.Screen.Officer.Frame:GetChecked());
-
 						if (Tongues.UI.MainMenu.Screen.Officer.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.Screen.Officer = true;
 						else
@@ -1832,7 +1808,7 @@ end;
 					text	 = {};
 	
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","ScreenRaidButton", Tongues.UI.MainMenu.AdvancedOptions.Frame);
+						self.Frame = CreateFrame("CheckButton","ScreenRaidButton", Tongues.UI.MainMenu.AdvancedOptions.Frame, "UICheckButtonTemplate");
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
@@ -1853,8 +1829,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Screen.Raid.Frame:SetChecked(not Tongues.UI.MainMenu.Screen.Raid.Frame:GetChecked());
-
 						if (Tongues.UI.MainMenu.Screen.Raid.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.Screen.Raid = true;
 						else
@@ -1872,7 +1846,7 @@ end;
 					text	 = {};
 	
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","ScreenRaidAlert", Tongues.UI.MainMenu.AdvancedOptions.Frame);
+						self.Frame = CreateFrame("CheckButton","ScreenRaidAlert", Tongues.UI.MainMenu.AdvancedOptions.Frame, "UICheckButtonTemplate");
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
@@ -1893,8 +1867,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Screen.RaidAlert.Frame:SetChecked(not Tongues.UI.MainMenu.Screen.RaidAlert.Frame:GetChecked());
-
 						if (Tongues.UI.MainMenu.Screen.RaidAlert.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.Screen.RaidAlert = true;
 						else
@@ -1912,7 +1884,7 @@ end;
 					text	 = {};
 	
 					Configure = function(self)
-						self.Frame = CreateFrame("CheckButton","ScreenBattleground", Tongues.UI.MainMenu.AdvancedOptions.Frame);
+						self.Frame = CreateFrame("CheckButton","ScreenBattleground", Tongues.UI.MainMenu.AdvancedOptions.Frame, "UICheckButtonTemplate");
 						self.Frame:SetScript("OnMouseDown", self.OnMouseDown);
 						self.Frame:SetScript("OnMouseUp", self.OnMouseUp);				
 						self.Frame:SetFrameStrata("DIALOG")
@@ -1933,8 +1905,6 @@ end;
 					end;
 	
 					OnMouseUp = function(self)
-						Tongues.UI.MainMenu.Screen.Battleground.Frame:SetChecked(not Tongues.UI.MainMenu.Screen.Battleground.Frame:GetChecked());
-
 						if (Tongues.UI.MainMenu.Screen.Battleground.Frame:GetChecked() == true) then
 							Tongues.Settings.Character.Screen.Battleground = true;
 						else
