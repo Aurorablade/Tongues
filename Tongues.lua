@@ -23,7 +23,7 @@ local EDDM = LibStub("ElioteDropDownMenu-1.0")
 local Tclasses = {}
 FillLocalizedClassList(Tclasses, true)
 
-local BlizzLangs = {"Darnassian", "Pandaren","Zandali","Thalassian","Goblin","Gnomish","Taurahe","Forsaken","Dwarvish","Draenei","Demonic", "Shalassian"}
+local BlizzLangs = {"Darnassian", "Pandaren","Zandali","Thalassian","Goblin","Gnomish","Taurahe","Forsaken","Dwarvish","Draenei","Demonic", "Shalassian","Draconic"}
 
 
 --===============================================MAIN===================================================--
@@ -486,6 +486,8 @@ end;
 					self.Settings.Character.Language = "Pandaren"
 				elseif UnitRace("player") == "Vulpera" then
 					self.Settings.Character.Language = "Vulpera"
+				elseif UnitRace("player") == "Dracthyr" then
+					self.Settings.Character.Language = "Draconic"
 				end;
 				self.Settings.Character.Fluency[self.Settings.Character.Language] = Tongues_Character.Fluency[self.Settings.Character.Language] or 100
 
