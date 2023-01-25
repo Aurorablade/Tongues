@@ -1,4 +1,4 @@
-## Interface: 100000
+## Interface: 100005
 ## Title: Tongues
 ## Version:1.10
 ## Notes: Create and use custom-defined languages, dialects, effects, and filters.
