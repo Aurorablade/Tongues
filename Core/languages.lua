@@ -2038,9 +2038,52 @@ Tongues.Language["Vulpera"].Difficulty = {
 };
 
 
---Submitted by user odynumlive
-Tongues.Language["Vrykul"] ={};
-Tongues.Language["Vrykul"]["ignore"] = { "Durotar", "Zandalar", "Voodoo", "Hakkar", "Exodar", "Amani", "Darkspear","Thrall","Sylvannas","Vol'jin","Bloodhoof","Kael'thas","Theron","Wrynn","Proudmoore","Tyrande","Malfurion","Illidan","Zul'Amman","Zul'Gurub","Ula'tek","C'thun"};
+--Submitted by user Odynum (Argent Dawn EU)
+Tongues.Language["Vrykul"] = {
+[1] = {"v","í"," o","a","ð",},
+[2] = {"il","ir","lo","hé","úl",},
+[3] = {"dal","fén","hil","yul","sal",},
+[4] = {"iðva","vahl","aero","wilr","uslo",},
+[5] = {"thaim","opkam","vulak","sralr","þuhar",},
+[6] = {"tíbeir","eomhið","kalroh","invarh","oltrar",},
+[7] = {"nafiskr","ilvarun","oskarul","álðtaul","galdrik",},
+[8] = {"vulantru","nirantyr","wassholt","lokrantr","yvoltrak",},
+[9] = {"falrentir","ilrontuhl","tælvessin","hraulvast","vohlmanet",},
+[10] = {"ektalunost","wraltruhln","æhlcarntil","yviltratos","fehltulohn",},
+[11] = {"ðégrentuhln","ðolíáhvuhln","aunthreltis","vrauhlektil","etvraluhtlo",},
+[12] = {"hrothulvahkt","ðrevuhlorkan","iltarulsolhn","eklanvuhlohr","fahlánðtarul",},
+};
+Tongues.Language["Vrykul"].Difficulty = {
+["default"] = 1000;
+
+["Alliance"] = 0;
+["Horde"] = 0;
+
+["Human"] = 0;
+["Dwarf"] = 0;
+["Gnome"] = 0;
+["Night Elf"] = 0;
+["Draenei"] = 0;
+
+["Orcish"] = 0;
+["Troll"] = 0;
+["Undead"] = 0;
+["Tauren"] = 0;
+["Blood Elf"] = 0;
+
+["Warrior"] = 0;
+["Rogue"] = 0;
+["Druid"] = 0;
+["Mage"] = 0;
+["Warlock"] = 0;
+["Paladin"] = 0;
+["Priest"] = 0;
+["Shaman"] = 0;
+["Hunter"] = 0;
+["Death Knight"]= 0;
+};
+
+Tongues.Language["Vrykul"]["ignore"] = { "Durotar","Northrend","Maelstrom","Odyn'um","Kalimdor","Eastern Kingdoms", "Outland","Thrall","Sylvannas","Dragon Isles","Broken Isles","Argus","Draenor","Wrynn","Proudmoore","Tyrande","Malfurion","Illidan","Pandaria","Ymiron","Tyr","Odyn","Zandalar","Kul Tiras","Shadowlands"};
 
 Tongues.Language["Vrykul"]["substitute"] = {
 ["faithful"] = "fall",
@@ -2051,13 +2094,13 @@ Tongues.Language["Vrykul"]["substitute"] = {
 ["elune"] = "elune",
 ["moon"] = "máni",
 ["demon"] = "vættr",
-["scourge"] = "aptrgǫngu-maðr",
-["sun"] = "rǫðull",
+["scourge"] = "aptrgongu-maðr",
+["sun"] = "roðull",
 ["tauren"] = "graðungr",
 ["orc"] = "grœnn kykvendi",
 ["undead"] = "draugr",
 ["blood elf"] = "ljósálfar",
-["troll"] = "trǫll",
+["troll"] = "troll",
 ["human"] = "manlíkan",
 ["dwarf"] = "dvergr",
 ["night elf"] = "dökkálfar",
@@ -2084,10 +2127,13 @@ Tongues.Language["Vrykul"]["substitute"] = {
 ["darnassus"] = "dökkálfar staðr",
 ["blood"] = "blóð",
 ["hello"] = "heil",
-["how are you"] = "hvernig eru þú",
+["how"] = "hvernig",
+["are"] = "eru",
+["you"] = "þú",
 ["heavens"] = "höll",
 ["good"] = "góðr",
-["and you"] = "ok þú",
+["and"] = "ok",
+["you"] = "þú",
 ["that"] = "þeim",
 ["I"]        = "ek",
 ["you"] = "þú",
@@ -2101,6 +2147,8 @@ Tongues.Language["Vrykul"]["substitute"] = {
 ["her"] = "hana",
 ["his"] = "hans",
 ["it"] = "hennar",
+["hers"] = "hanas",
+["aye"] = "jáe",
 };
 
 

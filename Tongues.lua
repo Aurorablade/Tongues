@@ -192,7 +192,7 @@ Tongues = Class:inherits(Tongues,{
 					_G["ChatFrame" .. i ]:AddMessage("   Cycle <cycle through languages"		,1,1,0)
 					_G["ChatFrame" .. i ]:AddMessage("   Dialect <Chosen Dialect>"		,1,1,0)
 					_G["ChatFrame" .. i ]:AddMessage("   Remove <Language to remove CASE SENSATIVE>"		,1,1,0)
-					_G["ChatFrame" .. i ]:AddMessage("   Remove <Language to add CASE SENSATIVE> <FLUANCY>"		,1,1,0)
+					_G["ChatFrame" .. i ]:AddMessage("   Add <Language to add CASE SENSATIVE> <FLUANCY>"		,1,1,0)
 					_G["ChatFrame" .. i ]:AddMessage("   List List all Lanugages"		,1,1,0)
 					_G["ChatFrame" .. i ]:AddMessage("   Translate <Name> - Add or remove a translater(if they aren't on ther list it adds, if they are it removes)"		,1,1,0)
 					_G["ChatFrame" .. i ]:AddMessage("   Help - this message"				,1,1,0)
@@ -218,7 +218,7 @@ Tongues = Class:inherits(Tongues,{
                     TonguesMiniMenu:SetPoint("CENTER")
             elseif param[1] ~= nil and string.lower(param[1]) == "opt" then
 			
-			Tongues.UI.MainMenu.Frame:Show();
+				Tongues.UI.MainMenu.Frame:Show();
 			elseif param[1] ~= nil and string.lower(param[1]) == "cycle" then
                --if countLangauge() ~= 1 then
 			   Tongues:CycleLanguage();
@@ -1685,9 +1685,9 @@ end		]]
 	end;
 	
 	SetDialect = function(self, dialect)
-		EDDM.UIDropDownMenu_ClearAll(self.UI.MainMenu.Speak.DialectDropDown.dropdownFrame)
+		--EDDM.UIDropDownMenu_ClearAll(self.UI.MainMenu.Speak.DialectDropDown.dropdownFrame)
 		Tongues.Settings.Character.Dialect = dialect
-		Lib_UIDropDownMenu_SetSelectedValue(Tongues.UI.MainMenu.Speak.DialectDropDown.dropdownFrame, dialect)
+		--Lib_UIDropDownMenu_SetSelectedValue(Tongues.UI.MainMenu.Speak.DialectDropDown.dropdownFrame, dialect)
 	end;
 	
 	-- Returns currently set languages dialect or nil if none
