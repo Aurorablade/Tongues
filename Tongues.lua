@@ -190,9 +190,11 @@ Tongues = Class:inherits(Tongues,{
 					_G["ChatFrame" .. i ]:AddMessage("   <language>(just /tongues and language to speak a language)"				,1,1,0)
 					_G["ChatFrame" .. i ]:AddMessage("   Shapeshift <true|false>"		,1,1,0)
 					_G["ChatFrame" .. i ]:AddMessage("   Cycle <cycle through languages"		,1,1,0)
-					_G["ChatFrame" .. i ]:AddMessage("   Dialect <Chosen Dialect>"		,1,1,0)
+					_G["ChatFrame" .. i ]:AddMessage("   Dialect <Chosen Dialect CASE SENSATIVE>"		,1,1,0)
+					_G["ChatFrame" .. i ]:AddMessage("   Affect <Chosen Effect(stutter,etc) CASE SENSATIVE, blank to remove><FREQUENCY(0-100)>"		,1,1,0)
 					_G["ChatFrame" .. i ]:AddMessage("   Remove <Language to remove CASE SENSATIVE>"		,1,1,0)
 					_G["ChatFrame" .. i ]:AddMessage("   Add <Language to add CASE SENSATIVE> <FLUANCY>"		,1,1,0)
+					_G["ChatFrame" .. i ]:AddMessage("   Roleplay <No option toggles the roleplay filter on and off>"		,1,1,0)
 					_G["ChatFrame" .. i ]:AddMessage("   List List all Lanugages"		,1,1,0)
 					_G["ChatFrame" .. i ]:AddMessage("   Translate <Name> - Add or remove a translater(if they aren't on ther list it adds, if they are it removes)"		,1,1,0)
 					_G["ChatFrame" .. i ]:AddMessage("   Help - this message"				,1,1,0)
@@ -204,8 +206,12 @@ Tongues = Class:inherits(Tongues,{
 			elseif param[1] ~= nil and string.lower(param[1]) == "dialect" then
 					Tongues:SetDialect(param[2]);
 
-			elseif param[1] ~= nil and string.lower(param[1]) == "filter" then
-
+			elseif param[1] ~= nil and string.lower(param[1]) == "roleplay" then
+				if Tongues.Settings.Character.Filter == TONGUES_NONE then
+					Tongues.Settings.Character.Filter = "Roleplay";
+				else 
+					Tongues.Settings.Character.Filter = TONGUES_NONE;
+				end;
 		    elseif param[1] ~= nil and string.lower(param[1]) == "shapeshift" then
 					if Tongues.Settings.Character.ShapeshiftLanguage == true then
 						Tongues.Settings.Character.ShapeshiftLanguage = false;
@@ -223,7 +229,12 @@ Tongues = Class:inherits(Tongues,{
                --if countLangauge() ~= 1 then
 			   Tongues:CycleLanguage();
 			   --end
-			   
+			elseif param[1] ~= nil and string.lower(param[1]) == "affect" then 
+					if param[2] ~= nil then
+						Tongues.Settings.Character.Affect = param[2];
+					else
+						Tongues.Settings.Character.Affect = TONGUES_NONE;
+					end;
 			elseif param[1] ~= nil and string.lower(param[1]) == "list" then
 						DEFAULT_CHAT_FRAME:AddMessage("Known Languages:");
 						for k,v in pairs(Tongues.Settings.Character.Fluency) do
@@ -1234,7 +1245,7 @@ HandleSend = function(self, msg, chatType, langID, language, channel)--HANDLE TE
 		local s = self.Settings.Character[type];
 
 		--randomseed(math.random(0,2147483647)+(GetTime() * 1000));
-		if (self[type] ~= nil ) and (self[type][s] ~= nil ) and (math.random(1,100) < self.Settings.Character.AffectFrequency) then
+		if (self[type] ~= nil) then--and (self[type][s] ~= nil ) and (math.random(1,100) < self.Settings.Character.AffectFrequency) then
 			msg = self:ApplyEffect(msg, self[type][s]["substitute"]);
 		end;
 		-- End Affects
