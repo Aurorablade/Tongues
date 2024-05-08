@@ -145,15 +145,13 @@ Tongues = Class:inherits(Tongues,{
 			};
 			UI = {
 				MainMenu = {
-					point = "CENTER", 
-					relativeTo = UIParent, 
+					point = "CENTER",
 					relativePoint = "CENTER",
 					xOfs = 0;
 					yOfs = 0;
 				};
 				MiniMenu = {
-					point = "CENTER", 
-					relativeTo = UIParent, 
+					point = "CENTER",
 					relativePoint = "CENTER",
 					xOfs = 0;
 					yOfs = 0;
@@ -537,10 +535,17 @@ end;
 				end;
 			end;
 			--Lib_UIDropDownMenu_Initialize(Tongues.UI.MainMenu.Speak.LanguageDropDown.Frame, Tongues.UpdateLanguageDropDown);	
-			
+
 			
 			self:SetLanguage(self.Settings.Character.Language);
-			
+
+			-- Removing UIParent from settings
+			if self.Settings.Character.UI.MiniMenu.relativeTo then
+				self.Settings.Character.UI.MiniMenu.relativeTo = nil;
+			end
+			if self.Settings.Character.UI.MainMenu.relativeTo then
+				self.Settings.Character.UI.MainMenu.relativeTo = nil;
+			end
 			
 			----------------------
 			self.Settings.Global = Tongues_Global;
