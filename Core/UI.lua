@@ -129,7 +129,8 @@ end;
 
 			OnDragStop = function (self)
 				self:StopMovingOrSizing();
-				Tongues.Settings.Character.UI.MiniMenu.point, Tongues.Settings.Character.UI.MiniMenu.relativeTo, Tongues.Settings.Character.UI.MiniMenu.relativePoint, Tongues.Settings.Character.UI.MiniMenu.xOfs, Tongues.Settings.Character.UI.MiniMenu.yOfs = self:GetPoint();
+				local relativeTo;
+				Tongues.Settings.Character.UI.MiniMenu.point, relativeTo, Tongues.Settings.Character.UI.MiniMenu.relativePoint, Tongues.Settings.Character.UI.MiniMenu.xOfs, Tongues.Settings.Character.UI.MiniMenu.yOfs = self:GetPoint();
 			end;
 		};
         	
@@ -220,7 +221,8 @@ end;
 
 			OnDragStop = function (self)
 				self:StopMovingOrSizing();
-				Tongues.Settings.Character.UI.MainMenu.point, Tongues.Settings.Character.UI.MainMenu.relativeTo, Tongues.Settings.Character.UI.MainMenu.relativePoint, Tongues.Settings.Character.UI.MainMenu.xOfs, Tongues.Settings.Character.UI.MainMenu.yOfs = self:GetPoint();
+				local relativeTo;
+				Tongues.Settings.Character.UI.MainMenu.point, relativeTo, Tongues.Settings.Character.UI.MainMenu.relativePoint, Tongues.Settings.Character.UI.MainMenu.xOfs, Tongues.Settings.Character.UI.MainMenu.yOfs = self:GetPoint();
 			end;
 			--=======================================================================================================
 			SpeakButton = {
